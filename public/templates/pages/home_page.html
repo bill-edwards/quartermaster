@@ -9,8 +9,8 @@
 		+ Create a new inventory
 	</div>
 	<div class='create_inv' ng-show='expanded'>
-		<input type='text' placeholder="Inventory name" style='display:inline'/>
-		<button class='float_right'>Save</button>
+		<input type='text' placeholder="Inventory name" style='display:inline' ng-model='newInventory'/>
+		<button class='float_right' ng-click='createInventory()'>Save</button>
 	</div>
 	<br class='clearer'/>
 </div>
