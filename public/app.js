@@ -87,10 +87,9 @@ qmApp.controller('ViewInvController', ['$scope', '$routeParams', '$http', functi
 	$scope.ordering = 'name';
 	$scope.show = {status:'!4'}; 
 
-	$http.get('api/inventory/' + invId + '.json')
+	$http.get('api/inventory/' + invId)
 	.success(function(data){
 		$scope.inventory = data; 
-		console.log(data);
 	})
 	.error(function(err){
 		console.log("QMErr: Data could not be retrieved from server");
@@ -157,7 +156,7 @@ qmApp.controller('CreateEventController', ['$scope', function($scope){
 }]);
 
 // Controller for edit-inventory page. 
-qmApp.controller('EditInvController', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http){
+qmApp.controller('EditInvController', ['$scope', '$routeParams', '$http', '$location', function($scope, $routeParams, $http, $location){
 	var invId = $routeParams.invId; 
 
 	// Get inventory data from server. 
@@ -192,6 +191,7 @@ qmApp.controller('EditInvController', ['$scope', '$routeParams', '$http', functi
 		});
 		console.log(newItems);
 		console.log(removedItems);
+		$location.path('/view/inventory/'+$scope.inventory.id);
 	};
 
 }]);

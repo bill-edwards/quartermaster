@@ -83,6 +83,39 @@ a:hover.navbar{
 	background-color:Gray;
 }
 
+/* Home page */
+
+div.inv_list_container{
+	width:300px;
+}
+
+ul.inv_list{
+	list-style-type:none;
+	padding:0;
+	margin:0;
+}
+
+a.inv_list{
+	font-family:Arial;
+	text-decoration:none;
+	color:Black;
+}
+
+div.inv_list{
+	background-color:LightGray;
+	padding:5px;
+}
+
+div:hover.inv_list{
+	background-color:Gray;
+}
+
+/* View inventory */
+
+div.view_inv_container{
+	width:700px;
+}
+
 /* Itembox */
 
 div.green{
