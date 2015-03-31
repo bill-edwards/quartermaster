@@ -1,0 +1,9 @@
+<div ng-controller='InvListController'>
+	<h2>My inventories</h2>
+	<ul>
+		<li ng-repeat='inventory in inventories'>
+			<a href='#/view/inventory/{{inventory.id}}'>{{inventory.name}}</a>
+		</li>
+	</ul>
+	<br class='clearer'/>
+</div>

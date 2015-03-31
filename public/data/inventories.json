@@ -1,0 +1,8 @@
+[
+	
+	{"name":"Climbing", "id":"1"},
+	{"name":"Camping", "id":"2"}, 
+	{"name":"Kayaking", "id":"3"},
+	{"name":"Hiking", "id":"4"},
+	{"name":"Triathlon", "id":"5"}
+]

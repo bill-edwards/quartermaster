@@ -1,0 +1,35 @@
+<div ng-controller='EditInvController'>
+	<h2>Edit inventory</h2>
+	Inventory name: <input type='text' ng-model='inventory.name' />
+	<a class='like_button float_right' ng-click='saveChanges()'>Save changes</a><br/><br/>
+
+	<!-- Items currently in inventory -->
+	<div class='inoutboxes'>
+		<h3>Items in inventory</h3><hr/>
+		<div ng-repeat='item in inventory.items | filter: {inOut: "in"}' ng-controller='InOutBoxController'>
+			{{item.name}}
+			<button class='float_right' ng-click='remove()'>Remove</button>
+		</div>
+	</div>
+
+	<!-- Adding a new item -->
+	<div class='inoutboxes' ng-controller='CreateItemController'>
+		<h3>Add a new item</h3>
+		Item name: <input type='text' ng-model='name'/>
+		<button class='float_right' ng-click='addItem()'>Add</button><br/><br/>
+		<hr/>
+		<h3>Search other inventories</h3>
+	</div>
+
+	<!-- Items which have been removed from inventory during this editing session -->
+	<div class='inoutboxes'>
+		<h3>Items removed from inventory</h3><hr/>
+		<div ng-repeat='item in inventory.items | filter: {inOut: "out"}' ng-controller='InOutBoxController'>
+			{{item.name}}
+			<button class='float_right' ng-click='reinstate()'>Reinstate</button>
+		</div>
+	</div>
+
+	<br class='clearer'/>
+
+</div>

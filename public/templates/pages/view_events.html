@@ -1,0 +1,20 @@
+<div ng-controller='EventListController'>
+
+	<div class='event_list'>
+		<h2>My events</h2>
+
+		<ul class='tabs'>
+			<li class='tabs' ng-class='{selected_tab: pastFuture==1, unselected_tab: pastFuture==-1}' ng-click='setPastFuture(1)'>Upcoming</li>
+			<li class='tabs' ng-class='{selected_tab: pastFuture==-1, unselected_tab: pastFuture==1}' ng-click='setPastFuture(-1)'>Past</li>
+		</ul>
+		<br/> 
+
+		<eventbox ng-repeat='event in events | filter: filterPastFuture' event-details='event'></eventbox>
+
+		<br class='clearer'/>
+	</div>
+
+	<create-event></create-event>
+
+	<br class='clearer'/>
+</div>

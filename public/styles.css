@@ -1,0 +1,159 @@
+
+div{
+	border:1px solid;
+	padding:25px;
+}
+
+br.clearer{
+	clear:both
+}
+
+.float_right{
+	float:right;
+}
+
+h1{
+	font-size:2.5em;
+	font-family:Arial;
+}
+
+div.main_body{
+	padding:1px;
+}
+
+input{
+	font-size: 18px;
+}
+
+a.like_button{
+	font-family:Arial;
+	text-decoration:none;
+	background-color:LightGray;
+	color:Black;
+	padding:5px;
+	border:1px solid;
+}
+
+a:hover.like_button{
+	background-color:Gray;
+}
+
+/* Titlebar */
+
+div.titlebar{
+	padding:2px;
+}
+
+div.title{
+	float:left;
+	padding:3px;
+}
+
+a.title{
+	text-decoration:none;
+	color:Black;
+}
+
+div.navbar{
+	float:right;
+	padding:15px;
+}
+
+ul.navbar{
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+
+li.navbar{
+	display:inline;
+}
+
+a.navbar{
+	font-weight:bold;
+	font-family:Arial;
+	text-transform:uppercase;
+	text-decoration:none;
+	background-color:LightGray;
+	color:Black;
+	padding:8px;
+}
+
+a:hover.navbar{
+	background-color:Gray;
+}
+
+/* Itembox */
+
+div.green{
+	background-color:PaleGreen;
+}
+
+div.yellow{
+	background-color:Khaki;
+}
+
+div.red{
+	background-color:Pink;
+}
+
+p.itemname{
+	font-family:Arial;
+	font-size:20px;
+	display:inline;
+}
+
+p.itemissue{
+	display:inline;
+}
+
+/* View event list */
+
+div.event_list{
+	float:left;
+	width:560px;
+}
+
+ul.tabs{
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+
+li.tabs{
+	display:inline;
+	font-weight:bold;
+	font-family:Arial;
+	text-transform:uppercase;
+	color:Black;
+	padding:8px;
+	cursor: pointer;
+}
+
+.selected_tab{
+	background-color: Gray;
+	border: 1px solid red;
+}
+
+.unselected_tab{
+	background-color: LightGray;
+	border: 1px solid;
+}
+
+/* Create event */ 
+
+div.create_event{
+	float:left;
+	width:360px;
+}
+
+/* Edit inventory */
+
+div.inoutboxes{
+	padding:2px;
+	float:left;
+	width:358px;
+}
+
+
+

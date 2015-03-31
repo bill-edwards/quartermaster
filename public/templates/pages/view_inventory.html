@@ -1,0 +1,22 @@
+<div ng-controller='ViewInvController'>
+	<h2>{{inventory.name}}</h2>
+	Sort by:
+	<select ng-model='ordering'>
+		<option value='name'>Name</option>
+		<option value='status'>Status</option>
+	</select>
+	Show:
+	<select ng-model='show.status'>
+		<option value='!4'>All</option>
+		<option value='1'>Replacement required</option>
+		<option value='2'>Issue to address</option>
+		<option value='!3'>Replacement/Issue</option>
+	</select>
+	<a class='like_button' href='#/edit/inventory/{{inventory.id}}'>Edit inventory</a>
+	<a class='like_button'>Delete inventory</a>
+	<br/><br/>
+
+	<itembox ng-repeat='item in inventory.items | filter: show | orderBy: ordering' item-details='item'></itembox>
+
+	<br class='clearer'/>
+</div>
