@@ -96,18 +96,23 @@ ul.inv_list{
 }
 
 a.inv_list{
-	font-family:Arial;
 	text-decoration:none;
 	color:Black;
 }
 
 div.inv_list{
+	font-family:Arial;
 	background-color:LightGray;
 	padding:5px;
 }
 
 div:hover.inv_list{
 	background-color:Gray;
+}
+
+div.create_inv{
+	background-color:LightGray;
+	padding:5px;
 }
 
 /* View inventory */

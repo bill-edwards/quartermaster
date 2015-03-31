@@ -70,6 +70,8 @@ qmApp.directive('createEvent', function(){
 
 // Controller for list of inventories. 
 qmApp.controller('InvListController', ['$scope', '$http', function($scope, $http){
+	
+	// Retrieve data from server. 
 	$http.get('data/inventories.json')
 	.success(function(data){
 		$scope.inventories=data; 
@@ -78,6 +80,12 @@ qmApp.controller('InvListController', ['$scope', '$http', function($scope, $http
 	.error(function(err){
 		console.log("QMErr: Data could not be retrieved from server");
 	});
+
+	// Control the create-inventory pane. 
+	$scope.expanded = false; 
+	$scope.expandCreate = function(){
+		$scope.expanded=!$scope.expanded; 
+	};
 }]);
 
 // Controller for view-inventory page. 
@@ -160,7 +168,7 @@ qmApp.controller('EditInvController', ['$scope', '$routeParams', '$http', '$loca
 	var invId = $routeParams.invId; 
 
 	// Get inventory data from server. 
-	$http.get('data/inventory_' + invId + '.json')
+	$http.get('api/inventory/' + invId)
 	.success(function(data){
 		$scope.inventory = data; 
 		$scope.inventory.items.forEach(function(item){

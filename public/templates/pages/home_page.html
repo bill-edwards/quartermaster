@@ -5,6 +5,12 @@
 			<a class='inv_list' href='#/view/inventory/{{inventory.id}}'><div class='inv_list'>{{inventory.name}}</div></a>
 		</li>
 	</ul><br/>
-	<a class='inv_list' href='#/view/inventory/{{inventory.id}}'><div class='inv_list'>+ Create a new inventory</div></a>
+	<div class='inv_list' ng-click='expandCreate()'>
+		+ Create a new inventory
+	</div>
+	<div class='create_inv' ng-show='expanded'>
+		<input type='text' placeholder="Inventory name" style='display:inline'/>
+		<button class='float_right'>Save</button>
+	</div>
 	<br class='clearer'/>
 </div>
