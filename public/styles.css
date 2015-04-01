@@ -38,6 +38,18 @@ a:hover.like_button{
 	background-color:Gray;
 }
 
+/* Welcome page */ 
+
+div.login_signup{
+	width:300px;
+	float:left;
+}
+
+div.welcome_message{
+	width:700px;
+	float:left;
+}
+
 /* Titlebar */
 
 div.titlebar{
