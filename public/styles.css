@@ -123,6 +123,7 @@ div:hover.inv_list{
 }
 
 div.create_inv{
+	font-family:Arial;
 	background-color:LightGray;
 	padding:5px;
 }

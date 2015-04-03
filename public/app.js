@@ -82,11 +82,7 @@ qmApp.controller('InvListController', ['$scope', '$http', '$location', function(
 	});
 
 	// Control the create-inventory pane. 
-	$scope.expanded = false; 
 	$scope.newInventory = "";
-	$scope.expandCreate = function(){
-		$scope.expanded=!$scope.expanded; 
-	};
 	$scope.createInventory = function(){
 		if ($scope.newInventory){
 			$http.post('/api/inventory/new',{name:$scope.newInventory})
