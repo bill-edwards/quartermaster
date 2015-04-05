@@ -5,7 +5,9 @@ create database qmNew;
 	create table users(
 		id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		username varchar(128) NOT NULL,
-		password varchar(128) NOT NULL
+		password varchar(128) NOT NULL, 
+		loginAttempts int, 
+		timeout bigint
 		)ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_bin;
 
 	create table inventories(
