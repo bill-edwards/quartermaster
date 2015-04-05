@@ -72,7 +72,7 @@ qmApp.directive('createEvent', function(){
 qmApp.controller('InvListController', ['$scope', '$http', '$location', function($scope, $http, $location){
 	
 	// Retrieve data from server. 
-	$http.get('api/user/1')
+	$http.get('api/user/me')
 	.success(function(data){
 		$scope.inventories=data.inventories; 
 		console.log(data);
