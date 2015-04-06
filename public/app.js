@@ -115,7 +115,7 @@ qmApp.controller('ViewInvController', ['$scope', '$routeParams', '$http', functi
 }]);
 
 // Controller for itembox. 
-qmApp.controller('ItemboxController', ['$scope', function($scope){
+qmApp.controller('ItemboxController', ['$scope', '$http', function($scope, $http){
 	$scope.buttonLabel = "Update status";
 	$scope.expanded = false; 
 	$scope.newStatus = $scope.item.status; 
@@ -125,10 +125,16 @@ qmApp.controller('ItemboxController', ['$scope', function($scope){
 		$scope.buttonLabel=$scope.expanded ? "^" : "Update status";
 	};
 	$scope.updateStatus = function(newStatus){
-		$scope.item.status = newStatus; 
-		$scope.newStatus = newStatus; 
-		$scope.item.issue = (newStatus==2) ? $scope.newIssue : ""; 
-		$scope.toggleBox();
+		$http.put('api/item/'+$scope.item.id, {status:newStatus, issue:$scope.newIssue})
+		.success(function(data){
+			$scope.item.status = newStatus; 
+			$scope.newStatus = newStatus; 
+			$scope.item.issue = (newStatus==2) ? $scope.newIssue : ""; 
+			$scope.toggleBox();
+		})
+		.error(function(err){
+			console.log("QMErr: Data could not be retrieved from server");
+		});
 	};
 }]);
 
