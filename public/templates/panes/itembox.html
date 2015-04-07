@@ -1,7 +1,7 @@
-<div ng-class='{red:item.status==1, yellow:item.status==2, green:item.status==3}' ng-controller='ItemboxController'>
+<div class = 'itembox' ng-class='{red:item.status==1, yellow:item.status==2, green:item.status==3}' ng-controller='ItemboxController'>
 	<p class='itemname'>{{item.name}}</p><p class='itemissue'>&nbsp&nbsp&nbsp{{item.issue}}</p>
 	<button class='float_right' ng-click='toggleBox()'>{{buttonLabel}}</button>
-	<div ng-show='expanded'>
+	<div class='update_status' ng-show='expanded'>
 		<p ng-hide='(item.status==1)'><input type='radio' name='status_update_{{item.id}}' value='1' ng-model='newStatus'/>Needs replacing?</p>
 		<p ng-hide='(item.status==2)'><input type='radio' name='status_update_{{item.id}}' value='2' ng-model='newStatus'/>Issue to resolve?</p>
 		<p ng-show='(newStatus==2 && item.status!=2)'><input type='text' ng-model='newIssue' placeholder="What's wrong?"/></p>

@@ -136,6 +136,10 @@ div.view_inv_container{
 
 /* Itembox */
 
+div.itembox{
+	padding:10px;
+}
+
 div.green{
 	background-color:PaleGreen;
 }
@@ -146,6 +150,10 @@ div.yellow{
 
 div.red{
 	background-color:Pink;
+}
+
+div.update_status{
+	padding:10px;
 }
 
 p.itemname{
