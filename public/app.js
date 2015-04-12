@@ -203,19 +203,20 @@ qmApp.controller('EditInvController', ['$scope', '$routeParams', '$http', '$loca
 		var addedItems = [];
 		var removedItems = [];
 		$scope.inventory.items.forEach(function(item){
-			if(item.inOut=='in' && item.editStatus=='N'){
-				newItems.push(item);
-			}
-			else if(item.inOut=='in' && item.editStatus=='A'){
+			if(item.inOut=='in' && item.editStatus=='A'){
 				addedItems.push(item.id);
 			}
 			else if(item.inOut=='out' && item.editStatus=='O'){
 				removedItems.push(item.id);
 			}
 		});
-		console.log(newItems);
-		console.log(removedItems);
-		$location.path('/view/inventory/'+$scope.inventory.id);
+		$http.put('api/inventory/' + invId, {name:$scope.inventory.name, removedItems:removedItems})
+		.success(function(data){
+			$location.path('/view/inventory/'+$scope.inventory.id);
+		})
+		.error(function(err){
+			console.log("QMErr: Data could not be retrieved from server");
+		});
 	};
 
 }]);
@@ -231,14 +232,20 @@ qmApp.controller('InOutBoxController', ['$scope', function($scope){
 }]);
 
 // Controller for create-item box on edit-inventory page.
-qmApp.controller('CreateItemController', ['$scope', function($scope){
+qmApp.controller('CreateItemController', ['$scope', '$http', function($scope, $http){
 	$scope.name = ""; 
 	$scope.addItem = function(){
 		if ($scope.name)
 		{
-			var newItem = {name:$scope.name, inOut:"in", editStatus:"N"};
-			$scope.inventory.items.push(newItem);
-			$scope.name = "";
+			$http.post('api/item/new', {name:$scope.name, invId:$scope.inventory.id})
+			.success(function(data){
+				var newItem = {id:data, name:$scope.name, inOut:"in", editStatus:"O"};
+				$scope.inventory.items.push(newItem);
+				$scope.name = "";
+			})
+			.error(function(err){
+				console.log(err.message);
+			});
 		}
 	};
 }]);
