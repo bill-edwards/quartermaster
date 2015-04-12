@@ -4,6 +4,10 @@ div{
 	padding:25px;
 }
 
+body{
+	background-color: LightGray;
+}
+
 br.clearer{
 	clear:both
 }
@@ -18,7 +22,9 @@ h1{
 }
 
 div.main_body{
-	padding:1px;
+	padding:10px;
+	background-color:LightGray;
+	border:none;
 }
 
 input{
@@ -54,11 +60,13 @@ div.welcome_message{
 
 div.titlebar{
 	padding:2px;
+	background-color: White;
 }
 
 div.title{
 	float:left;
 	padding:3px;
+	border:none;
 }
 
 a.title{
@@ -66,9 +74,16 @@ a.title{
 	color:Black;
 }
 
+div.logo{
+	float:left;
+	padding: 3px;
+	border:none;
+}
+
 div.navbar{
 	float:right;
 	padding:15px;
+	border:none;
 }
 
 ul.navbar{
@@ -99,6 +114,7 @@ a:hover.navbar{
 
 div.inv_list_container{
 	width:300px;
+	background-color: White; 
 }
 
 ul.inv_list{
@@ -132,6 +148,7 @@ div.create_inv{
 
 div.view_inv_container{
 	width:700px;
+	background-color: White; 
 }
 
 /* Itembox */
@@ -207,6 +224,10 @@ div.create_event{
 }
 
 /* Edit inventory */
+
+div.edit_inv_div{
+	background-color: White;
+}
 
 div.inoutboxes{
 	padding:2px;
