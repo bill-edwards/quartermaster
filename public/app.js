@@ -1,6 +1,6 @@
 'use strict';
 
-var qmApp = angular.module('qmApp',['ngRoute']);
+var qmApp = angular.module('qmApp',['ngRoute','viewInventory']);
 
 
 // Routing
@@ -98,22 +98,6 @@ qmApp.controller('InvListController', ['$scope', '$http', '$location', function(
 
 }]);
 
-// Controller for view-inventory page. 
-qmApp.controller('ViewInvController', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http){
-	var invId = $routeParams.invId; 
-
-	$scope.ordering = 'name';
-	$scope.show = {status:'!4'}; 
-
-	$http.get('api/inventory/' + invId)
-	.success(function(data){
-		$scope.inventory = data; 
-	})
-	.error(function(err){
-		console.log("QMErr: Data could not be retrieved from server");
-	});
-}]);
-
 // Controller for itembox. 
 qmApp.controller('ItemboxController', ['$scope', '$http', function($scope, $http){
 	$scope.buttonLabel = "Update status";
@@ -191,6 +175,7 @@ qmApp.controller('EditInvController', ['$scope', '$routeParams', '$http', '$loca
 			item.editStatus='O';
 			item.inOut='in';
 		});
+		$scope.invNameField = $scope.inventory.name; // Must be named separately so we can detemine if it has been changed when saving changes. 
 		console.log(data);
 	})
 	.error(function(err){
@@ -210,7 +195,10 @@ qmApp.controller('EditInvController', ['$scope', '$routeParams', '$http', '$loca
 				removedItems.push(item.id);
 			}
 		});
-		$http.put('api/inventory/' + invId, {name:$scope.inventory.name, removedItems:removedItems})
+		var updateData = {addedItems: addedItems, removedItems:removedItems};
+		if ($scope.invNameField!=$scope.inventory.name) updateData.name = $scope.invNameField; 
+		console.log(updateData);
+		$http.put('api/inventory/' + invId, updateData)
 		.success(function(data){
 			$location.path('/view/inventory/'+$scope.inventory.id);
 		})
