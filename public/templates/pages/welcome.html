@@ -3,19 +3,19 @@
 		<h2>Welcome to Quartermaster!</h2>
 		<p>Quartermaster helps you keep track of all your equipment. </p>
 	</div>
-	<div class='content'>
+	<div class='content' ng-controller='LoginController'>
 		<h3>Log-in...</h3>
-		<form>
-			<input type='text' placeholder='username'/><br/><br/>
-			<input type='password' placeholder='password'/><br/><br/>
+		<form ng-submit='submit()'>
+			<input type='text' placeholder='username' ng-model='username'/><br/><br/>
+			<input type='password' placeholder='password' ng-model='password'/><br/><br/>
 			<input type='submit' value='log in'/>
 		</form>
 	</div>
-	<div class='content'>
+	<div class='content' ng-controller='SignupController'>
 		<h3>...or Sign-up</h3>
-		<form>
-			<input type='text' placeholder='username'/><br/><br/>
-			<input type='password' placeholder='password'/><br/><br/>
+		<form ng-submit='submit()'>
+			<input type='text' placeholder='username' ng-model='username'/><br/><br/>
+			<input type='password' placeholder='password' ng-model='password'/><br/><br/>
 			<input type='submit' value='sign up'/>
 		</form>
 	</div>
