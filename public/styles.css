@@ -4,6 +4,10 @@ div{
 	padding:25px;
 }
 
+div.content{
+	background-color: White;
+}
+
 body{
 	background-color: LightGray;
 }
