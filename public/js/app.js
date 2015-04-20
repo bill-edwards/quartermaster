@@ -1,6 +1,6 @@
 'use strict';
 
-var qmApp = angular.module('qmApp',['ngRoute','home','viewInventory','eventList','editInventory','titlebar','itembox','eventbox','createEvent']);
+var qmApp = angular.module('qmApp',['ngRoute','authSync','welcome','home','viewInventory','eventList','editInventory','titlebar','itembox','eventbox','createEvent']);
 
 
 // Routing
@@ -20,7 +20,21 @@ qmApp.config(['$routeProvider', function($routeProvider){
     .when('/edit/inventory/:invId', {
     	templateUrl: 'templates/pages/edit_inventory.html'
     })
+    .when('/welcome', {
+        templateUrl: 'templates/pages/welcome.html'
+    })
     .otherwise({
       redirectTo: '/home'
+    });
+}]);
+
+qmApp.controller('MainBodyController', ['$scope', function($scope){
+
+    // Initially hide main body, until authorisation state can be determined. 
+    $scope.initialised = false; 
+    
+    // Show main body as soon as authSync service receives authorisation data from back-end. 
+    $scope.$on('initialise',function(){
+        $scope.initialised = true;
     });
 }]);

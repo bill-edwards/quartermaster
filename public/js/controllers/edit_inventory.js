@@ -3,7 +3,13 @@
 angular.module('editInventory',[])
 
 	// Controller for page. 
-	.controller('EditInvController', ['$scope', '$routeParams', '$http', '$location', function($scope, $routeParams, $http, $location){
+	.controller('EditInvController', ['$scope', '$routeParams', '$http', '$location','authSyncService', function($scope, $routeParams, $http, $location){
+
+		// Gatekeeper
+		$scope.$on('initialise', function(){
+			if (!authSyncService.isLoggedIn()) $location.path('/welcome');
+		});
+
 		var invId = $routeParams.invId; 
 
 		// Get inventory data from server. 

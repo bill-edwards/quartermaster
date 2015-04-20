@@ -1,9 +1,14 @@
 'use strict';
 
 angular.module('viewInventory',[])
-	.controller('ViewInvController', ['$scope', '$routeParams', '$http', '$location', function($scope, $routeParams, $http, $location){
-		var invId = $routeParams.invId; 
+	.controller('ViewInvController', ['$scope', '$routeParams', '$http', '$location','authSyncService', function($scope, $routeParams, $http, $location, authSyncService){
+		
+		// Gatekeeper
+		$scope.$on('initialise', function(){
+			if (!authSyncService.isLoggedIn()) $location.path('/welcome');
+		});
 
+		var invId = $routeParams.invId; 
 		$scope.ordering = 'name';
 		$scope.show = {status:'!4'}; 
 
@@ -14,4 +19,9 @@ angular.module('viewInventory',[])
 		.error(function(err){
 			console.log("QMErr: Data could not be retrieved from server");
 		});
+		
+		$scope.$on('initialise',function(){
+			if (!authSyncService.isLoggedIn()) $location.path('/welcome');
+		});
+		
 	}]);

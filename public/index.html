@@ -9,6 +9,7 @@
 	<script src="angular/angular-route.js"></script>
 
 	<script src='/js/app.js'></script>
+	<script src='/js/controllers/welcome.js'></script>
 	<script src='/js/controllers/home.js'></script>
 	<script src='/js/controllers/view_inventory.js'></script>
 	<script src='/js/controllers/edit_inventory.js'></script>
@@ -17,6 +18,7 @@
 	<script src='/js/directives/itembox.js'></script>
 	<script src='/js/directives/eventbox.js'></script>
 	<script src='/js/directives/create_event.js'></script>
+	<script src='/js/services/auth_sync.js'></script>
 
 </head>
 
@@ -25,7 +27,7 @@
 	<titlebar></titlebar>
 
 	<!-- Main content of page -->
-	<div ng-view class='main_body'></div>
+	<div ng-controller='MainBodyController' ng-show='initialised' ng-view class='main_body'></div>
 
 </body>
 

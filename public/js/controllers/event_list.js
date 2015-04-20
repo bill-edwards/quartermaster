@@ -1,7 +1,12 @@
 'use strict';
 
 angular.module('eventList',[])
-	.controller('EventListController', ['$scope', '$http', function($scope, $http){
+	.controller('EventListController', ['$scope', '$http', 'authSyncService', function($scope, $http, authSyncService){
+
+		// Gatekeeper
+		$scope.$on('initialise', function(){
+			if (!authSyncService.isLoggedIn()) $location.path('/welcome');
+		});
 
 		// Retrieve event data from server. 
 		$http.get('data/events.json')
@@ -29,4 +34,5 @@ angular.module('eventList',[])
 		$scope.filterPastFuture = function(event){
 			return (($scope.pastFuture * $scope.now)<($scope.pastFuture * event.endDate)); 
 		};
+
 	}]);

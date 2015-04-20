@@ -1,13 +1,17 @@
 'use strict';
 
 angular.module('home',[])
-	.controller('InvListController', ['$scope', '$http', '$location', function($scope, $http, $location){
-	
+	.controller('InvListController', ['$scope', '$http', '$location','authSyncService', function($scope, $http, $location, authSyncService){
+
+		// Gatekeeper
+		$scope.$on('initialise', function(){
+			if (!authSyncService.isLoggedIn()) $location.path('/welcome');
+		});
+		
 		// Retrieve data from server. 
 		$http.get('api/user/me')
 		.success(function(data){
 			$scope.inventories=data.inventories; 
-			console.log(data);
 		})
 		.error(function(err){
 			console.log("QMErr: Data could not be retrieved from server");
@@ -29,4 +33,5 @@ angular.module('home',[])
 				});
 			}
 		};
+
 	}]);
