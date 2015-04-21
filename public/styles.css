@@ -50,14 +50,19 @@ a:hover.like_button{
 
 /* Welcome page */ 
 
-div.login_signup{
-	width:300px;
+div.login_signup_holder{
+	width:350px;
 	float:left;
+	padding:0px;
+}
+
+div.login_signup{
+	margin:10px;
 }
 
 div.welcome_message{
-	width:700px;
-	float:left;
+	width:600px;
+	float:right;
 }
 
 /* Titlebar */
