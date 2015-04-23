@@ -8,7 +8,8 @@
 			<h3>Log-in...</h3>
 			<form ng-submit='submit()'>
 				<input type='text' placeholder='username' ng-model='username'/><br/><br/>
-				<input type='password' placeholder='password' ng-model='password'/><br/><br/>
+				<input type='password' placeholder='password' ng-model='password'/><br/><br ng-hide='errorMessage'/>
+				<p class='error_message' ng-show='errorMessage'>{{errorMessage}}</p>
 				<input type='submit' value='log in'/>
 			</form>
 		</div>
@@ -16,7 +17,8 @@
 			<h3>...or Sign-up</h3>
 			<form ng-submit='submit()'>
 				<input type='text' placeholder='username' ng-model='username'/><br/><br/>
-				<input type='password' placeholder='password' ng-model='password'/><br/><br/>
+				<input type='password' placeholder='password' ng-model='password'/><br/><br ng-hide='errorMessage'/>
+				<p class='error_message' ng-show='errorMessage'>{{errorMessage}}</p>
 				<input type='submit' value='sign up'/>
 			</form>
 		</div>

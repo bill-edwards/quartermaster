@@ -12,6 +12,7 @@ angular.module('welcome',[])
 		
 		$scope.username='';
 		$scope.password='';
+		$scope.errorMessage='';
 		$scope.submit = function(){
 			// Don't allow submission if fields are empty. 
 			if ($scope.username && $scope.password){
@@ -23,8 +24,17 @@ angular.module('welcome',[])
 					$location.path('/home');
 					console.log(data.id);
 				})
-				.error(function(err){
-					console.log("QMErr: Data could not be retrieved from server");
+				.error(function(err, status){
+					if (status==401){
+						$scope.errorMessage = "Too many failed log-in attempts: please wait five minutes."
+					}
+					else if (status==404){
+						$scope.errorMessage = "Username/Password incorrect";
+					}
+					else if (status==500){
+						$scope.errorMessage = "Sorry, there was a problem connecting to the server. Please try again.";
+					}
+					else console.log('unknown error');
 				});
 			}
 		};
@@ -35,6 +45,7 @@ angular.module('welcome',[])
 
 		$scope.username='';
 		$scope.password='';
+		$scope.errorMessage='';
 		$scope.submit = function(){
 			// Don't allow submission if fields are empty. 
 			if ($scope.username && $scope.password){
@@ -46,8 +57,14 @@ angular.module('welcome',[])
 					$location.path('/home');
 					console.log(data.id);
 				})
-				.error(function(err){
-					console.log("QMErr: Data could not be retrieved from server");
+				.error(function(err, status){
+					if (status==400){
+						$scope.errorMessage = "This username is taken - please choose another";
+					}
+					else if (status==500){
+						$scope.errorMessage = "Sorry, there was a problem connecting to the server. Please try again.";
+					}
+					else console.log('unknown error');
 				});
 			}
 		};

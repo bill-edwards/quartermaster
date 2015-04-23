@@ -35,6 +35,10 @@ input{
 	font-size: 18px;
 }
 
+p.error_message{
+	color:Red;
+}
+
 a.like_button{
 	font-family:Arial;
 	text-decoration:none;
