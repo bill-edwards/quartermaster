@@ -93,7 +93,9 @@ angular.module('welcome',[])
 					}
 					else console.log('unknown error');
 				});
+				
 			}
 		};
+
 	}]);
 	

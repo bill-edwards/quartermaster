@@ -56,7 +56,6 @@ angular.module('validate',[])
 
 			toCheck.forEach(function(field){
 				var formattedData = thisModel[field].format(data[field]);
-				console.log(formattedData);
 				if (!thisModel[field].regex.test(formattedData)) {
 					errors[field] = thisModel[field].errMessage; 
 					hasErrors = true; 
