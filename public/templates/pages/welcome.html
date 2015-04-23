@@ -1,28 +1,38 @@
 <div ng-controller='WelcomeController'>
+
 	<div class='content welcome_message'>
 		<h2>Welcome to Quartermaster!</h2>
 		<p>Quartermaster helps you keep track of all your equipment. </p>
 	</div>
+
 	<div class='login_signup_holder'>
+
 		<div class='content login_signup' ng-controller='LoginController'>
 			<h3>Log-in...</h3>
 			<form ng-submit='submit()'>
-				<input type='text' placeholder='username' ng-model='username'/><br/><br/>
-				<input type='password' placeholder='password' ng-model='password'/><br/><br ng-hide='errorMessage'/>
-				<p class='error_message' ng-show='errorMessage'>{{errorMessage}}</p>
+				<input type='text' placeholder='username' ng-model='data.username'/><br/>
+				<br ng-hide='errors.username'/><p class='error_message' ng-show='errors.username'>{{errors.username}}</p>
+				<input type='password' placeholder='password' ng-model='data.password'/><br/>
+				<br ng-hide='errors.password'/><p class='error_message' ng-show='errors.password'>{{errors.password}}</p>
 				<input type='submit' value='log in'/>
+				<p class='error_message' ng-show='errors.form'>{{errors.form}}</p>
 			</form>
 		</div>
+
 		<div class='content login_signup' ng-controller='SignupController'>
 			<h3>...or Sign-up</h3>
 			<form ng-submit='submit()'>
-				<input type='text' placeholder='username' ng-model='username'/><br/><br/>
-				<input type='password' placeholder='password' ng-model='password'/><br/><br ng-hide='errorMessage'/>
-				<p class='error_message' ng-show='errorMessage'>{{errorMessage}}</p>
+				<input type='text' placeholder='username' ng-model='data.username'/><br/>
+				<br ng-hide='errors.username'/><p class='error_message' ng-show='errors.username'>{{errors.username}}</p>
+				<input type='password' placeholder='password' ng-model='data.password'/><br/>
+				<br ng-hide='errors.password'/><p class='error_message' ng-show='errors.password'>{{errors.password}}</p>
 				<input type='submit' value='sign up'/>
+				<p class='error_message' ng-show='errors.form'>{{errors.form}}</p>
 			</form>
 		</div>
+
 		<br class='clearer'/>
 	</div>
+
 	<br class='clearer'/>
 </div>
