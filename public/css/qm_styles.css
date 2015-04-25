@@ -48,94 +48,22 @@ a:hover.like_button{
 	background-color:Gray;
 }
 
-/* Welcome page */ 
-
-div.login_signup_holder{
-	width:350px;
-	float:left;
-	padding:0px;
-}
-
-div.login_signup{
-}
-
-div.welcome_message{
-	width:600px;
-	float:right;
-}
-
-/* Titlebar */
-
-div.titlebar{
-	padding:2px;
-	background-color: White;
-}
-
-div.title{
-	float:left;
-	padding:3px;
-	border:none;
-}
-
-a.title{
-	text-decoration:none;
-	color:Black;
-}
-
-div.logo{
-	float:left;
-	padding: 3px;
-	border:none;
-}
-
-
-
-
 /* Home page */
 
-div.inv_list_container{
-	width:300px;
-	background-color: White; 
-}
-
-ul.inv_list{
-	list-style-type:none;
-	padding:0;
-	margin:0;
-}
-
 a.inv_list{
-	text-decoration:none;
-	color:Black;
-}
-
-div.inv_list{
-	font-family:Arial;
 	background-color:LightGray;
-	padding:5px;
-}
-
-div:hover.inv_list{
-	background-color:Gray;
+	border:solid 1px;
 }
 
 div.create_inv{
-	font-family:Arial;
 	background-color:LightGray;
-	padding:5px;
-}
-
-/* View inventory */
-
-div.view_inv_container{
-	width:700px;
-	background-color: White; 
+	border:solid 1px;
 }
 
 /* Itembox */
 
 div.itembox{
-	padding:10px;
+	border:solid 1px;
 }
 
 div.green{

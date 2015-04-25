@@ -1,22 +1,35 @@
-<div ng-controller='ViewInvController' class='view_inv_container'>
-	<h2>{{inventory.name}}</h2>
-	Sort by:
-	<select ng-model='ordering'>
-		<option value='name'>Name</option>
-		<option value='status'>Status</option>
-	</select>
-	Show:
-	<select ng-model='show.status'>
-		<option value='!4'>All</option>
-		<option value='1'>Replacement required</option>
-		<option value='2'>Issue to address</option>
-		<option value='!3'>Replacement/Issue</option>
-	</select>
-	<a class='like_button' href='#/edit/inventory/{{inventory.id}}'>Edit inventory</a>
-	<a class='like_button'>Delete inventory</a>
-	<br/><br/>
+<div class='container' ng-controller='ViewInvController'>
 
-	<itembox ng-repeat='item in inventory.items | filter: show | orderBy: ordering' item-details='item'></itembox>
+	<div class='row'>
 
-	<br class='clearer'/>
+		<div class='col-md-10'>
+
+			<div class='content'>
+
+				<h3>{{inventory.name}}</h3><hr/>
+				Sort by:
+				<select ng-model='ordering'>
+					<option value='name'>Name</option>
+					<option value='status'>Status</option>
+				</select>
+				Show:
+				<select ng-model='show.status'>
+					<option value='!4'>All</option>
+					<option value='1'>Replacement required</option>
+					<option value='2'>Issue to address</option>
+					<option value='!3'>Replacement/Issue</option>
+				</select> &nbsp
+				<div class='btn-group'>
+					<a href='#/edit/inventory/{{inventory.id}}' type='button' class='btn btn-default'>Edit</a>
+					<a type='button' class='btn btn-default'>Delete</a>
+				</div><br/><br/>
+
+				<itembox ng-repeat='item in inventory.items | filter: show | orderBy: ordering' item-details='item'></itembox>
+
+			</div>
+
+		</div><!--col-->
+
+	</div><!--row-->
+
 </div>
