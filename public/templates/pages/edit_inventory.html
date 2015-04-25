@@ -7,6 +7,7 @@
 				<h2>Edit inventory</h2>
 				Inventory name: <input type='text' ng-model='invNameField'/>
 				<button class='float_right' ng-click='saveChanges()'>Save changes</button><br/><br/>
+				<p class='error_message' ng-show='errors.name'>{{errors.name}}</p>
 			</div>
 		</div>
 	</div>

@@ -3,7 +3,7 @@
 angular.module('editInventory',[])
 
 	// Controller for page. 
-	.controller('EditInvController', ['$scope', '$routeParams', '$http', '$location','authSyncService', function($scope, $routeParams, $http, $location){
+	.controller('EditInvController', ['$scope', '$routeParams', '$http', '$location','authSyncService','validate', function($scope, $routeParams, $http, $location, authSyncService, validate){
 
 		// Gatekeeper
 		$scope.$on('initialise', function(){
@@ -11,6 +11,7 @@ angular.module('editInventory',[])
 		});
 
 		var invId = $routeParams.invId; 
+		$scope.errors = {name:"", form:""};
 
 		// Get inventory data from server. 
 		$http.get('api/inventory/' + invId)
@@ -29,7 +30,11 @@ angular.module('editInventory',[])
 
 		// On submission, prepare data for return to server. 
 		$scope.saveChanges = function(){
-			var newItems = [];
+
+			// Clear any error messages from last submission. 
+			$scope.errors = {name:"", form:""};
+
+			// Assemble arrays of added and removed items. 
 			var addedItems = [];
 			var removedItems = [];
 			$scope.inventory.items.forEach(function(item){
@@ -41,7 +46,18 @@ angular.module('editInventory',[])
 				}
 			});
 			var updateData = {addedItems: addedItems, removedItems:removedItems};
-			if ($scope.invNameField!=$scope.inventory.name) updateData.name = $scope.invNameField; 
+
+			// If inventory name is being edited, validate, and add to update data. 
+			if ($scope.invNameField!=$scope.inventory.name) {
+				updateData.name = $scope.invNameField; 
+				var errors = validate(updateData, 'inventory', ['name']);
+				if (errors){
+					$scope.errors = errors; 
+					return;
+				}
+			}
+
+			// Submit data to server. 
 			$http.put('api/inventory/' + invId, updateData)
 			.success(function(data){
 				$location.path('/view/inventory/'+$scope.inventory.id);
