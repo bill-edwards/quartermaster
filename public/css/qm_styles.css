@@ -12,6 +12,13 @@ body{
 	float:right;
 }
 
+p.error_message{
+	color:Red;
+}
+
+
+
+
 div.main_body{
 	padding:10px;
 	background-color:LightGray;
@@ -20,10 +27,6 @@ div.main_body{
 
 input{
 	font-size: 18px;
-}
-
-p.error_message{
-	color:Red;
 }
 
 a.like_button{
