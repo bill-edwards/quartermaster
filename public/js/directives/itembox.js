@@ -26,17 +26,20 @@ angular.module('itembox',[])
 
 		$scope.updateStatus = function(newStatus){
 
+			var updateData = {status:newStatus};
+
 			// If issue is being updated, validate the string supplied. 
 			if ($scope.newIssue){
 				var errors = validate({issue:$scope.newIssue}, 'item', ['issue']);
 				if (errors) {
 					$scope.errors = errors; 
 					return;
-				} 
+				}
+				updateData.issue = $scope.newIssue; 
 			}
 			
 			// If validation succeeds, send request to back-end.
-			$http.put('api/item/'+$scope.item.id, {status:newStatus, issue:$scope.newIssue})
+			$http.put('api/item/'+$scope.item.id, updateData)
 			.success(function(data){
 				$scope.item.status = newStatus; 
 				$scope.newStatus = newStatus; 
