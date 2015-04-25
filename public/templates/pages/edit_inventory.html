@@ -1,35 +1,56 @@
-<div class='edit_inv_div' ng-controller='EditInvController'>
-	<h2>Edit inventory</h2>
-	Inventory name: <input type='text' ng-model='invNameField' />
-	<a class='like_button float_right' ng-click='saveChanges()'>Save changes</a><br/><br/>
+<div class='container' ng-controller='EditInvController'>
 
-	<!-- Items currently in inventory -->
-	<div class='inoutboxes'>
-		<h3>Items in inventory</h3><hr/>
-		<div ng-repeat='item in inventory.items | filter: {inOut: "in"}' ng-controller='InOutBoxController'>
-			{{item.name}}
-			<button class='float_right' ng-click='remove()'>Remove</button>
+	<!--Header-->
+	<div class='row'>
+		<div class='col-md-12'>
+			<div class='content'>
+				<h2>Edit inventory</h2>
+				Inventory name: <input type='text' ng-model='invNameField'/>
+				<button class='float_right' ng-click='saveChanges()'>Save changes</button><br/><br/>
+			</div>
 		</div>
 	</div>
 
-	<!-- Adding a new item -->
-	<div class='inoutboxes' ng-controller='CreateItemController'>
-		<h3>Add a new item</h3>
-		Item name: <input type='text' ng-model='name'/>
-		<button class='float_right' ng-click='addItem()'>Add</button><br/><br/>
-		<hr/>
-		<h3>Search other inventories</h3>
-	</div>
+	<!--Editing columns-->
+	<div class='row'>
 
-	<!-- Items which have been removed from inventory during this editing session -->
-	<div class='inoutboxes'>
-		<h3>Items removed from inventory</h3><hr/>
-		<div ng-repeat='item in inventory.items | filter: {inOut: "out"}' ng-controller='InOutBoxController'>
-			{{item.name}}
-			<button class='float_right' ng-click='reinstate()'>Reinstate</button>
+		<!--Items in inventory-->
+		<div class='col-md-4'>
+			<div class='content'>
+				<h3>Items in inventory</h3><hr/>
+				<ul class='list-group'>
+					<li class='list-group-item in-out-item' ng-repeat='item in inventory.items | filter: {inOut: "in"}' ng-controller='InOutBoxController'>
+						{{item.name}}
+						<button class='float_right' ng-click='remove()'>Remove</button>
+					</li>
+				</ul>
+			</div>
 		</div>
-	</div>
 
-	<br class='clearer'/>
+		<!--Items removed inventory-->
+		<div class='col-md-4'>
+			<div class='content'>
+				<h3>Removed from inventory</h3><hr/>
+				<ul class='list-group'>
+					<li class='list-group-item in-out-item' ng-repeat='item in inventory.items | filter: {inOut: "out"}' ng-controller='InOutBoxController'>
+						{{item.name}}
+						<button class='float_right' ng-click='reinstate()'>Reinstate</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<!--Add new item-->
+		<div class='col-md-4'>
+			<div class='content' ng-controller='CreateItemController'>
+				<h3>Add a new item</h3>
+				<input type='text' ng-model='name' placeholder='item name'/>
+				<button ng-click='addItem()'>Add</button><br/><br/>
+				<hr/>
+				<h3>Search other inventories</h3>
+			</div>
+		</div>
+
+	</div>
 
 </div>

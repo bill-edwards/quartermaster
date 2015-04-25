@@ -144,5 +144,9 @@ div.inoutboxes{
 	width:358px;
 }
 
+li.in-out-item{
+	border:solid 1px;
+}
+
 
 
