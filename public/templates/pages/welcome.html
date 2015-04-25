@@ -1,38 +1,51 @@
-<div ng-controller='WelcomeController'>
+<div ng-controller='WelcomeController' class='container'>
 
-	<div class='content welcome_message'>
-		<h2>Welcome to Quartermaster!</h2>
-		<p>Quartermaster helps you keep track of all your equipment. </p>
-	</div>
+	<div class='row'>
 
-	<div class='login_signup_holder'>
-
-		<div class='content login_signup' ng-controller='LoginController'>
-			<h3>Log-in...</h3>
-			<form ng-submit='submit()'>
-				<input type='text' placeholder='username' ng-model='data.username'/><br/>
-				<br ng-hide='errors.username'/><p class='error_message' ng-show='errors.username'>{{errors.username}}</p>
-				<input type='password' placeholder='password' ng-model='data.password'/><br/>
-				<br ng-hide='errors.password'/><p class='error_message' ng-show='errors.password'>{{errors.password}}</p>
-				<input type='submit' value='log in'/>
-				<p class='error_message' ng-show='errors.form'>{{errors.form}}</p>
-			</form>
+		<!--Column for welcome message-->
+		<div class='col-md-8'>
+			<div class='content'>
+				<h2>Welcome to Quartermaster!</h2>
+				<p>Quartermaster helps you keep track of all your equipment.</p>
+				<ul>
+					<li>Create inventories for all your activities</li>
+					<li>Keep track of whether your kit is ready for action!</li>
+					<li>Log upcoming events and make sure you have everything you need</li>
+				</ul>
+			</div>
 		</div>
 
-		<div class='content login_signup' ng-controller='SignupController'>
-			<h3>...or Sign-up</h3>
-			<form ng-submit='submit()'>
-				<input type='text' placeholder='username' ng-model='data.username'/><br/>
-				<br ng-hide='errors.username'/><p class='error_message' ng-show='errors.username'>{{errors.username}}</p>
-				<input type='password' placeholder='password' ng-model='data.password'/><br/>
-				<br ng-hide='errors.password'/><p class='error_message' ng-show='errors.password'>{{errors.password}}</p>
-				<input type='submit' value='sign up'/>
-				<p class='error_message' ng-show='errors.form'>{{errors.form}}</p>
-			</form>
-		</div>
+		<!--Column for login and sign-up panes-->
+		<div class='col-md-4'>
 
-		<br class='clearer'/>
-	</div>
+			<!--Log-in pane-->
+			<div class='content login_signup' ng-controller='LoginController'>
+				<h3>Log-in...</h3>
+				<form ng-submit='submit()'>
+					<input type='text' placeholder='username' ng-model='data.username'/><br/>
+					<br ng-hide='errors.username'/><p class='error_message' ng-show='errors.username'>{{errors.username}}</p>
+					<input type='password' placeholder='password' ng-model='data.password'/><br/>
+					<br ng-hide='errors.password'/><p class='error_message' ng-show='errors.password'>{{errors.password}}</p>
+					<input type='submit' value='log in'/>
+					<p class='error_message' ng-show='errors.form'>{{errors.form}}</p>
+				</form>
+			</div>
 
-	<br class='clearer'/>
+			<!--Sign-up pane-->
+			<div class='content login_signup' ng-controller='SignupController'>
+				<h3>...or Sign-up</h3>
+				<form ng-submit='submit()'>
+					<input type='text' placeholder='username' ng-model='data.username'/><br/>
+					<br ng-hide='errors.username'/><p class='error_message' ng-show='errors.username'>{{errors.username}}</p>
+					<input type='password' placeholder='password' ng-model='data.password'/><br/>
+					<br ng-hide='errors.password'/><p class='error_message' ng-show='errors.password'>{{errors.password}}</p>
+					<input type='submit' value='sign up'/>
+					<p class='error_message' ng-show='errors.form'>{{errors.form}}</p>
+				</form>
+			</div>
+
+		</div><!--login/signup column-->
+
+	</div><!--row-->
+
 </div>

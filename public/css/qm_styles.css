@@ -1,8 +1,6 @@
-
-
-
 div.content{
 	background-color: White;
+	padding:10px;
 }
 
 body{
@@ -59,7 +57,6 @@ div.login_signup_holder{
 }
 
 div.login_signup{
-	margin:10px;
 }
 
 div.welcome_message{
