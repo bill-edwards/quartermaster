@@ -63,11 +63,26 @@ angular.module('editInventory',[])
 	}])
 
 	// Controller for create-item box. 
-	.controller('CreateItemController', ['$scope', '$http', function($scope, $http){
+	.controller('CreateItemController', ['$scope', '$http','validate', function($scope, $http, validate){
+		
 		$scope.name = ""; 
+		$scope.error = "";
+
 		$scope.addItem = function(){
+
+			// Don't allow submission if fields are empty. 
 			if ($scope.name)
 			{
+				// First clear any error messages from previous submission attempts. 
+				$scope.error="";
+
+				// Next validate contents of fields. 
+				var errors = validate({name:$scope.name}, 'item', ['name']); 
+				if (errors) {
+					$scope.error = errors.name; 
+					return;
+				}
+
 				$http.post('api/item/new', {name:$scope.name, invId:$scope.inventory.id})
 				.success(function(data){
 					var newItem = {id:data, name:$scope.name, inOut:"in", editStatus:"O"};

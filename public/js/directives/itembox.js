@@ -10,16 +10,32 @@ angular.module('itembox',[])
 		};
 	})
 
-	.controller('ItemboxController', ['$scope', '$http', function($scope, $http){
+	.controller('ItemboxController', ['$scope', '$http', 'validate', function($scope, $http, validate){
+
 		$scope.buttonLabel = "Update status";
 		$scope.expanded = false; 
-		$scope.newStatus = $scope.item.status; 
-		$scope.newIssue = "";
+
 		$scope.toggleBox = function(){
 			$scope.expanded=!$scope.expanded; 
 			$scope.buttonLabel=$scope.expanded ? "^" : "Update status";
 		};
+
+		$scope.newStatus = $scope.item.status; 
+		$scope.newIssue = "";
+		$scope.errors = {issue:"", form:""};
+
 		$scope.updateStatus = function(newStatus){
+
+			// If issue is being updated, validate the string supplied. 
+			if ($scope.newIssue){
+				var errors = validate({issue:$scope.newIssue}, 'item', ['issue']);
+				if (errors) {
+					$scope.errors = errors; 
+					return;
+				} 
+			}
+			
+			// If validation succeeds, send request to back-end.
 			$http.put('api/item/'+$scope.item.id, {status:newStatus, issue:$scope.newIssue})
 			.success(function(data){
 				$scope.item.status = newStatus; 
@@ -31,4 +47,13 @@ angular.module('itembox',[])
 				console.log("QMErr: Data could not be retrieved from server");
 			});
 		};
+
+		// Needed to clear out 'issue' field when clicking on a different radio button. 
+		// This isn't a problem at the back-end, because unless status=2, any 'issue' supplied will be ignored. 
+		// However it might be a problem if the issue fails front-end validation, and then we decided to update status to something other than '2'.
+		$scope.clearIssue = function(){
+			$scope.newIssue="";
+			$scope.errors.issue="";
+		}
+
 	}]);

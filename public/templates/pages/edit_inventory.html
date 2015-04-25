@@ -46,6 +46,7 @@
 				<h3>Add a new item</h3>
 				<input type='text' ng-model='name' placeholder='item name'/>
 				<button ng-click='addItem()'>Add</button><br/><br/>
+				<p class='error_message' ng-show='error'>{{error}}</p>
 				<hr/>
 				<h3>Search other inventories</h3>
 			</div>

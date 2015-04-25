@@ -20,6 +20,7 @@
 						+ Create a new inventory<br/>
 						<input type='text' placeholder="Inventory name" style='display:inline' ng-model='newInventory'/>
 						<button class='float_right' ng-click='createInventory()'>Save</button>
+						<p class='error_message' ng-show='error'>{{error}}</p>
 					</div>
 				</div>
 			</div>
