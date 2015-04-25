@@ -20,8 +20,8 @@
 					<option value='!3'>Replacement/Issue</option>
 				</select> &nbsp
 				<div class='btn-group'>
-					<a href='#/edit/inventory/{{inventory.id}}' type='button' class='btn btn-default'>Edit</a>
-					<a type='button' class='btn btn-default'>Delete</a>
+					<a href='#/edit/inventory/{{inventory.id}}' type='button' class='btn btn-default edit-delete-btn'>Edit</a>
+					<a type='button' class='btn btn-default edit-delete-btn'>Delete</a>
 				</div><br/><br/>
 
 				<itembox ng-repeat='item in inventory.items | filter: show | orderBy: ordering' item-details='item'></itembox>

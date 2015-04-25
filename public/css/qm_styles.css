@@ -8,17 +8,8 @@ body{
 	background-color: LightGray;
 }
 
-br.clearer{
-	clear:both
-}
-
 .float_right{
 	float:right;
-}
-
-h1{
-	font-size:2.5em;
-	font-family:Arial;
 }
 
 div.main_body{
@@ -48,6 +39,9 @@ a:hover.like_button{
 	background-color:Gray;
 }
 
+
+/****************************/
+
 /* Home page */
 
 a.inv_list{
@@ -57,6 +51,19 @@ a.inv_list{
 
 div.create_inv{
 	background-color:LightGray;
+	border:solid 1px;
+}
+
+/* View inventory */
+
+a.edit-delete-btn{
+	background-color:LightGray;
+	border:solid 1px;
+}
+
+/* Edit inventory */
+
+li.in-out-item{
 	border:solid 1px;
 }
 
@@ -91,6 +98,9 @@ p.itemname{
 p.itemissue{
 	display:inline;
 }
+
+
+/****************************/
 
 /* View event list */
 
@@ -130,22 +140,6 @@ li.tabs{
 div.create_event{
 	float:left;
 	width:360px;
-}
-
-/* Edit inventory */
-
-div.edit_inv_div{
-	background-color: White;
-}
-
-div.inoutboxes{
-	padding:2px;
-	float:left;
-	width:358px;
-}
-
-li.in-out-item{
-	border:solid 1px;
 }
 
 
