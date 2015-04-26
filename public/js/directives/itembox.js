@@ -10,7 +10,7 @@ angular.module('itembox',[])
 		};
 	})
 
-	.controller('ItemboxController', ['$scope', '$http', 'validate', function($scope, $http, validate){
+	.controller('ItemboxController', ['$scope', '$http', '$location', '$rootScope', 'validate', function($scope, $http, $location, $rootScope, validate){
 
 		$scope.buttonLabel = "Update status";
 		$scope.expanded = false; 
@@ -46,8 +46,21 @@ angular.module('itembox',[])
 				$scope.item.issue = (newStatus==2) ? $scope.newIssue : ""; 
 				$scope.toggleBox();
 			})
-			.error(function(err){
-				console.log("QMErr: Data could not be retrieved from server");
+			.error(function(err, status){
+				if (status==401){
+					window.alert('You seem to have been logged-out. Please log-in to continue.');
+					// Broadcast logout event to tell titlebar to become hidden. 
+					$rootScope.$broadcast('logout');
+					// Re-direct to welcome page.
+					$location.path('/welcome');
+				}
+				else if (status==404){
+					$scope.errors.form = "We're having trouble locating this item in our records. Please refresh this page and try again.";
+				}
+				else if (status==500){
+					$scope.errors.form = "Sorry, there was a problem connecting to the server. Please try again.";
+				}
+				else console.log("QMErr: Data could not be retrieved from server");
 			});
 		};
 

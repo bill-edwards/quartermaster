@@ -3,7 +3,7 @@
 angular.module('editInventory',[])
 
 	// Controller for page. 
-	.controller('EditInvController', ['$scope', '$routeParams', '$http', '$location','authSyncService','validate', function($scope, $routeParams, $http, $location, authSyncService, validate){
+	.controller('EditInvController', ['$scope', '$routeParams', '$http', '$location','$rootScope','authSyncService','validate', function($scope, $routeParams, $http, $location, $rootScope, authSyncService, validate){
 
 		// Gatekeeper
 		$scope.$on('initialise', function(){
@@ -11,7 +11,7 @@ angular.module('editInventory',[])
 		});
 
 		var invId = $routeParams.invId; 
-		$scope.errors = {name:"", form:""};
+		$scope.errors = {name:""};
 
 		// Get inventory data from server. 
 		$http.get('api/inventory/' + invId)
@@ -24,15 +24,27 @@ angular.module('editInventory',[])
 			$scope.invNameField = $scope.inventory.name; // Must be named separately so we can detemine if it has been changed when saving changes. 
 			console.log(data);
 		})
-		.error(function(err){
-			console.log("QMErr: Data could not be retrieved from server");
+		.error(function(err, status){
+			if (status==401){
+				window.alert('You seem to have been logged-out. Please log-in to continue.');
+				// Broadcast logout event to tell titlebar to become hidden. 
+				$rootScope.$broadcast('logout');
+				// Re-direct to welcome page.
+				$location.path('/welcome');
+			}
+			else if (status==404){
+				window.alert('We can\'t find any inventory of yours with this id');
+				// Re-direct to welcome page.
+				$location.path('/home');
+			}
+			else console.log('unknown error');
 		});
 
-		// On submission, prepare data for return to server. 
+		// Submit changes to back-end. 
 		$scope.saveChanges = function(){
 
 			// Clear any error messages from last submission. 
-			$scope.errors = {name:"", form:""};
+			$scope.errors = {name:""};
 
 			// Assemble arrays of added and removed items. 
 			var addedItems = [];
@@ -62,8 +74,26 @@ angular.module('editInventory',[])
 			.success(function(data){
 				$location.path('/view/inventory/'+$scope.inventory.id);
 			})
-			.error(function(err){
-				console.log("QMErr: Data could not be retrieved from server");
+			.error(function(err, status){
+				if (status==400){
+					$scope.errors.name = "You already have an inventory with this name";
+				}
+				else if (status==401){
+					window.alert('You seem to have been logged-out. Please log-in to continue.');
+					// Broadcast logout event to tell titlebar to become hidden. 
+					$rootScope.$broadcast('logout');
+					// Re-direct to welcome page.
+					$location.path('/welcome');
+				}
+				else if (status==404){
+					window.alert('We\'re having trouble locating this inventory in our records. Please try again.');
+					// Re-direct to welcome page.
+					$location.path('/home');
+				}
+				if (status==500){
+					$scope.errors.name = "Sorry, there was a problem connecting to the server. Please try again.";
+				}
+				else console.log('unknown error');
 			});
 		};
 	}])
@@ -79,7 +109,7 @@ angular.module('editInventory',[])
 	}])
 
 	// Controller for create-item box. 
-	.controller('CreateItemController', ['$scope', '$http','validate', function($scope, $http, validate){
+	.controller('CreateItemController', ['$scope','$http','$location','$rootScope','validate', function($scope, $http, $location, $rootScope, validate){
 		
 		$scope.name = ""; 
 		$scope.error = "";
@@ -99,14 +129,29 @@ angular.module('editInventory',[])
 					return;
 				}
 
+				// Submit data to server. 
 				$http.post('api/item/new', {name:$scope.name, invId:$scope.inventory.id})
 				.success(function(data){
-					var newItem = {id:data, name:$scope.name, inOut:"in", editStatus:"O"};
+					console.log(data);
+					var newItem = {id:data.id, name:$scope.name, inOut:"in", editStatus:"O"};
 					$scope.inventory.items.push(newItem);
 					$scope.name = "";
 				})
-				.error(function(err){
-					console.log(err.message);
+				.error(function(err, status){
+					if (status==400){
+						$scope.error = "You already have an item with this name";
+					}
+					else if (status==401){
+						window.alert('You seem to have been logged-out. Please log-in to continue.');
+						// Broadcast logout event to tell titlebar to become hidden. 
+						$rootScope.$broadcast('logout');
+						// Re-direct to welcome page.
+						$location.path('/welcome');
+					}
+					else if (status==500){
+						$scope.error = "Sorry, there was a problem connecting to the server. Please try again.";
+					}
+					else console.log("unknown error");
 				});
 			}
 		};

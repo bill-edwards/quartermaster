@@ -11,6 +11,7 @@
 			</p>
 			<p ng-hide='(item.status==3)'><input type='radio' name='status_update_{{item.id}}' value='3' ng-model='newStatus' ng-click='clearIssue()'/> Ready to go?</p>
 			<button ng-click='updateStatus(newStatus)'>Update status</button>
+			<p class='error_message' ng-show='errors.form'>{{errors.form}}</p>
 		</div>
 	</div>
 </div>

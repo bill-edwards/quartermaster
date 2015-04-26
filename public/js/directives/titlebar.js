@@ -39,7 +39,10 @@ angular.module('titlebar',[])
 				$location.path('/welcome');
 			})
 			.error(function(err){
-				console.log("QMErr: Log-out could not be completed, please try again");
+				if (status==500){
+					window.alert("Sorry, there was a problem connecting to the server. Please try again.");
+				}
+				else console.log('unknown error');
 			});
     	};
 

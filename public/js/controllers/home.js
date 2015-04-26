@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('home',[])
-	.controller('InvListController', ['$scope', '$http', '$location','authSyncService','validate', function($scope, $http, $location, authSyncService, validate){
+	.controller('InvListController', ['$scope', '$http', '$location','$rootScope','authSyncService','validate', function($scope, $http, $location, $rootScope, authSyncService, validate){
 
 		// Gatekeeper
 		$scope.$on('initialise', function(){
@@ -13,8 +13,15 @@ angular.module('home',[])
 		.success(function(data){
 			$scope.inventories=data.inventories; 
 		})
-		.error(function(err){
-			console.log("QMErr: Data could not be retrieved from server");
+		.error(function(err, status){
+			if (status==401){
+				window.alert('You seem to have been logged-out. Please log-in to continue.');
+				// Broadcast logout event to tell titlebar to become hidden. 
+				$rootScope.$broadcast('logout');
+				// Re-direct to welcome page.
+				$location.path('/welcome');
+			}
+			else console.log("QMErr: Data could not be retrieved from server");
 		});
 
 		// Control the create-inventory pane. 
@@ -41,8 +48,21 @@ angular.module('home',[])
 					$location.path('/edit/inventory/'+data.id);
 					console.log(data.id);
 				})
-				.error(function(err){
-					console.log("QMErr: Data could not be retrieved from server");
+				.error(function(err, status){
+					if (status==400){
+						$scope.error = "You already have another inventory with this name";
+					}
+					else if (status==401){
+						window.alert('You seem to have been logged-out. Please log-in to continue.');
+						// Broadcast logout event to tell titlebar to become hidden. 
+						$rootScope.$broadcast('logout');
+						// Re-direct to welcome page.
+						$location.path('/welcome');
+					}
+					else if (status==500){
+						$scope.error = "Sorry, there was a problem connecting to the server. Please try again.";
+					}
+					else console.log('unknown error');
 				});
 			}
 		};
