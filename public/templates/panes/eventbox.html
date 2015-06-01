@@ -1,6 +1,8 @@
-<div ng-controller='EventBoxController'>
-	<h3>{{event.name}}</h3>
-	{{event.startDateString}} - {{event.endDateString}}<br/><br/>
-	<button>See full inventory view</button>
-	<button>Delete event</button>
+<div class = 'panel panel-default box' ng-controller='EventboxController'>
+	<div class='panel-body'>
+		<h3>{{event.name}}</h3>
+		{{event.startDateString}} - {{event.endDateString}}<br/>
+		{{countdown}}
+		<button class='float_right'>See details</button>
+	</div>
 </div>
