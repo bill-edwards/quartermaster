@@ -1,20 +1,24 @@
-<div ng-controller='EventListController'>
+<div class='container' ng-controller='EventListController'>
 
-	<div class='event_list'>
-		<h2>My events</h2>
+	<div class='row'>
 
-		<ul class='tabs'>
-			<li class='tabs' ng-class='{selected_tab: pastFuture==1, unselected_tab: pastFuture==-1}' ng-click='setPastFuture(1)'>Upcoming</li>
-			<li class='tabs' ng-class='{selected_tab: pastFuture==-1, unselected_tab: pastFuture==1}' ng-click='setPastFuture(-1)'>Past</li>
-		</ul>
-		<br/> 
+		<div class='col-md-5'>
 
-		<eventbox ng-repeat='event in events | filter: filterPastFuture' event-details='event'></eventbox>
+			<div class='content'>
 
-		<br class='clearer'/>
-	</div>
+				<h2>My events</h2><hr/>
+				<ul class='nav nav-tabs'>
+					<li role='presentation' ng-class='{active: pastFuture==1}' ng-click='setPastFuture(1)'><a>Upcoming</a></li>
+					<li role='presentation' ng-class='{active: pastFuture==-1}' ng-click='setPastFuture(-1)'><a>Past</a></li>
+				</ul>
+				<br/> 
+				<eventbox ng-repeat='event in events | filter: filterPastFuture' event-details='event'></eventbox>
+				<br class='clearer'/>
 
-	<create-event></create-event>
+			</div>
 
-	<br class='clearer'/>
+		</div><!--col-->
+
+	</div><!--row-->
+
 </div>

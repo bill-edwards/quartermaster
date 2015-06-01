@@ -1,4 +1,4 @@
-<div class = 'panel panel-default itembox' ng-class='{red:item.status==1, yellow:item.status==2, green:item.status==3}' ng-controller='ItemboxController'>
+<div class = 'panel panel-default box' ng-class='{red:item.status==1, yellow:item.status==2, green:item.status==3}' ng-controller='ItemboxController'>
 	<div class='panel-body'>
 		<p class='itemname'>{{item.name}}</p><p class='itemissue'>&nbsp&nbsp&nbsp{{item.issue}}</p>
 		<button class='float_right' ng-click='toggleBox()'>{{buttonLabel}}</button>

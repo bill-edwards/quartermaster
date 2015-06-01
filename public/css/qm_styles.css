@@ -20,6 +20,10 @@ p.error_message{
 	display:inline;
 }
 
+div.box{
+	border:solid 1px;
+}
+
 
 
 div.main_body{
@@ -74,10 +78,6 @@ li.in-out-item{
 }
 
 /* Itembox */
-
-div.itembox{
-	border:solid 1px;
-}
 
 div.green{
 	background-color:PaleGreen;
