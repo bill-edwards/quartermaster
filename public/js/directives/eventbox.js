@@ -11,5 +11,6 @@ angular.module('eventbox',[])
 	})
 	
 	.controller('EventboxController', ['$scope','dateUtility', function($scope, dateUtility){
+		$scope.dateString = dateUtility.dateString($scope.event.startDate, $scope.event.endDate);
 		$scope.countdown = dateUtility.countdown($scope.event.startDate);
 	}]);

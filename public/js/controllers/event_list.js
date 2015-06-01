@@ -15,9 +15,7 @@ angular.module('eventList',[])
 			console.log(data);
 			$scope.events.forEach(function(event){ 
 				event.startDate = new Date(Number(event.startDate));
-				event.startDateString = event.startDate.toDateString(); 
 				event.endDate = new Date(Number(event.endDate));
-				event.endDateString = event.endDate.toDateString(); 
 				event.upcoming = ($scope.now<event.endDate);
 			});
 		})

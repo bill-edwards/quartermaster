@@ -16,10 +16,22 @@ angular.module('dateUtility',[])
 			else return Math.floor(daysDifference/30)+" months to go!";
 		};
 
-		function dateFormat(eventDate){
-			
+		function dateString(startDate, endDate){
+			// JS Date functions return numbers for months, so need a conversion array. 
+			var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; 
+
+			// One-day event. 
+			if (startDate.valueOf()==endDate.valueOf()) return startDate.toDateString();
+
+			// Multi-day events. 
+			// Event spans two years:
+			if (startDate.getFullYear()!=endDate.getFullYear()) return startDate.toDateString()+" - "+endDate.toDateString(); 
+			// Event spans two months: 
+			else if (startDate.getMonth()!=endDate.getMonth()) return startDate.getDate()+' '+months[startDate.getMonth()]+' - '+endDate.getDate()+' '+months[endDate.getMonth()]+' '+startDate.getFullYear();
+			else return startDate.getDate()+' - '+endDate.getDate()+' '+months[startDate.getMonth()]+' '+startDate.getFullYear();;
+
 		};
 
-		return {countdown:countdown, dateFormat:dateFormat}; 
+		return {countdown:countdown, dateString:dateString}; 
 
 	}]);
