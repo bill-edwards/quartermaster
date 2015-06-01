@@ -2,7 +2,7 @@
 	<div class='panel-body'>
 		<h3>{{event.name}}</h3>
 		{{event.startDateString}} - {{event.endDateString}}<br/>
-		{{countdown}}
+		<span ng-show='event.upcoming'>{{countdown}}</span>
 		<button class='float_right'>See details</button>
 	</div>
 </div>

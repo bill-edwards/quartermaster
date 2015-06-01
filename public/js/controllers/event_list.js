@@ -18,6 +18,7 @@ angular.module('eventList',[])
 				event.startDateString = event.startDate.toDateString(); 
 				event.endDate = new Date(Number(event.endDate));
 				event.endDateString = event.endDate.toDateString(); 
+				event.upcoming = ($scope.now<event.endDate);
 			});
 		})
 		.error(function(err){
@@ -32,7 +33,8 @@ angular.module('eventList',[])
 			$scope.now = Date.now();
 		};
 		$scope.filterPastFuture = function(event){
-			return (($scope.pastFuture * $scope.now)<($scope.pastFuture * event.endDate)); 
+			if ($scope.pastFuture==1) return event.upcoming; 
+			if ($scope.pastFuture==-1) return !event.upcoming; 
 		};
 
 	}]);
