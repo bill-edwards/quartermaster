@@ -15,6 +15,14 @@ id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 name varchar(128) NOT NULL
 )ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_bin;
 
+create table events(
+id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+name varchar(128) NOT NULL,
+startDate bigint NOT NULL,
+endDate bigint NOT NULL,
+invId int
+)ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_bin;
+
 create table items(
 id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 name varchar(128) NOT NULL, 
@@ -26,6 +34,12 @@ create table users_inventories(
 id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 userId int(11) NOT NULL,
 invId int(11) NOT NULL
+)ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_bin;
+
+create table users_events(
+id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+userId int(11) NOT NULL,
+eventId int(11) NOT NULL
 )ENGINE = INNODB CHARACTER SET utf8 COLLATE utf8_bin;
 
 create table inventories_items(
