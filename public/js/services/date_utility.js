@@ -28,7 +28,7 @@ angular.module('dateUtility',[])
 			if (startDate.getFullYear()!=endDate.getFullYear()) return startDate.toDateString()+" - "+endDate.toDateString(); 
 			// Event spans two months: 
 			else if (startDate.getMonth()!=endDate.getMonth()) return startDate.getDate()+' '+months[startDate.getMonth()]+' - '+endDate.getDate()+' '+months[endDate.getMonth()]+' '+startDate.getFullYear();
-			else return startDate.getDate()+' - '+endDate.getDate()+' '+months[startDate.getMonth()]+' '+startDate.getFullYear();;
+			else return startDate.getDate()+'-'+endDate.getDate()+' '+months[startDate.getMonth()]+' '+startDate.getFullYear();;
 
 		};
 
