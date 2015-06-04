@@ -9,9 +9,9 @@ angular.module('eventList',[])
 		});
 
 		// Retrieve event data from server. 
-		$http.get('data/events.json')
+		$http.get('api/user/me')
 		.success(function(data){
-			$scope.events=data; 
+			$scope.events=data.events; 
 			console.log(data);
 			$scope.events.forEach(function(event){ 
 				event.startDate = new Date(Number(event.startDate));
