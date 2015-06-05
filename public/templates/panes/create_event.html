@@ -1,4 +1,33 @@
-<div ng-controller='CreateEventController' class='create_event'>
-	<h2>Create new event</h2>
-	<input type='text' ng-model='name' />
+<div class = 'panel panel-default box' ng-controller='CreateEventController'>
+	<div class='panel-body'>
+		<h3>Create new event</h3>
+		<form ng-submit='submit()'>
+
+			<!-- Event name-->
+			<label>Event name</label><br/>
+			<input type='text' ng-model='name' placeholder='Event name'/><br/><br/>
+
+			<!-- Start date-->
+			<label>Start date</label>
+			<input type="date" class="form-control" datepicker-popup ng-model="startDate" min-date="startDate" ng-required="true" />
+			<p class='error_message' ng-show='errors.startDate'>{{errors.startDate}}</p><br/>
+
+			<!-- One-day- or multi-day-event radio boxes-->
+			<label>One-day event&nbsp</label><input type='radio' name='oneOrMulti' value='one' ng-model='multiDay'>&nbsp
+			<label>Multi-day event&nbsp</label><input type='radio' name='oneOrMulti' value='multi' ng-model='multiDay'>
+
+			<!-- End date-->
+			<p ng-show='(multiDay=="multi")'>
+				<label>End date</label>
+				<input type="date" class="form-control" datepicker-popup ng-model="endDate" min-date="startDate" ng-required="true" />
+			</p>
+			<p class='error_message' ng-show='errors.endDate'>{{errors.endDate}}</p>
+			<hr/>
+
+			<p>+ Add items from inventories</p><hr/>
+
+			<input type='submit' value='Create event'/>
+			<p class='error_message' ng-show='errors.form'>{{errors.form}}</p>
+		</form>
+	</div>
 </div>

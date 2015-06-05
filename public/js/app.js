@@ -1,6 +1,6 @@
 'use strict';
 
-var qmApp = angular.module('qmApp',['ngRoute','authSync','validate','dateUtility','welcome','home','viewInventory','eventList','editInventory','titlebar','itembox','eventbox','createEvent']);
+var qmApp = angular.module('qmApp',['ngRoute','ui.bootstrap','authSync','validate','dateUtility','welcome','home','viewInventory','eventList','editInventory','titlebar','itembox','eventbox','createEvent']);
 
 
 // Routing
