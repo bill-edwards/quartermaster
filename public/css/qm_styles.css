@@ -24,6 +24,10 @@ div.box{
 	border:solid 1px;
 }
 
+.like-link{
+	cursor:pointer;
+}
+
 
 
 div.main_body{
