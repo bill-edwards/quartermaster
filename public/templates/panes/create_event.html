@@ -25,9 +25,9 @@
 			<hr/>
 
 			<!-- Include list of inventories with checkboxes-->
-			<p>+ Add items from inventories</p>
-			<p ng-repeat='inventory in inventories'>
-				<input type='checkbox'/>&nbsp{{inventory.name}}
+			<p ng-click='toggle()' class='like-link'>+ Add items from inventories</p>
+			<p ng-repeat='inventory in inventories' ng-show='visibleInvs'>
+				<input type='checkbox' ng-model='checkboxes[inventory.id]'/>&nbsp{{inventory.name}}
 			</p>
 			<hr/>
 

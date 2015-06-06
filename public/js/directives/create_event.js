@@ -17,30 +17,48 @@ angular.module('createEvent',[])
 		$scope.startDate = now;
 		$scope.endDate = new Date(now.valueOf()+86400000);
 		$scope.multiDay = "one"; 
+
 		$scope.errors = {
 			name: "",
 			startDate: "",
 			endDate:"",
 			form:""
 		};
+		$scope.checkboxes = {};
 
+		// Control visibility of inventory checkboxes. 
+		$scope.visibleInvs = false; 
+		$scope.toggle = function(){
+			$scope.visibleInvs = !$scope.visibleInvs; 
+		};
+
+		// Handle form submission. 
 		$scope.submit = function(){
 
 			if ($scope.multiDay=='one') $scope.endDate = $scope.startDate; 
 
+			// Start date must be today or later. 
 			if ($scope.startDate<(now-86400000)) {
 				$scope.errors.startDate = "Start date should be in the future";
 				return; 
 			}
 
+			// End date must be later than start date. 
 			if ($scope.endDate<$scope.startDate){
 				$scope.errors.endDate = "Event must end after it starts!";
 				return; 
 			}
 
-			$http.post('api/event/new', {name:$scope.name, startDate:$scope.startDate.valueOf(), endDate:$scope.endDate.valueOf()})
+			// Assemble array of checked inventories. 
+			var checkedInvs = [];
+			for (var invId in $scope.checkboxes){
+				if ($scope.checkboxes[invId]) checkedInvs.push(Number(invId));
+			}
+
+			// Make request to back-end. 
+			$http.post('api/event/new', {name:$scope.name, startDate:$scope.startDate.valueOf(), endDate:$scope.endDate.valueOf(), invIds:checkedInvs})
 			.success(function(data){
-				$location.path('/view/events');
+				$location.path('/home');
 			})
 			.error(function(err, status){
 				if (status==401){
@@ -55,8 +73,6 @@ angular.module('createEvent',[])
 				}
 				else console.log("QMErr: Data could not be retrieved from server");
 			});
-
 		};
-
 	}]);
 
