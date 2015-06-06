@@ -1,0 +1,23 @@
+<div class='container' ng-controller='ViewEventController'>
+
+	<div class='row'>
+
+		<div class='col-md-10'>
+
+			<div class='content'>
+				<h2>{{event.name}}</h2>
+				<h4>{{dateString}}&nbsp - &nbsp{{countdown}}</h4>
+				<div class='btn-group'>
+					<a href='#/edit/event/{{event.id}}' type='button' class='btn btn-default edit-delete-btn'>Edit</a>
+					<a type='button' class='btn btn-default edit-delete-btn'>Delete</a>
+				</div><hr/>
+
+				<item-list items-details='event.items'></item-list>
+
+			</div>
+
+		</div><!--col-->
+
+	</div><!--row-->
+
+</div>

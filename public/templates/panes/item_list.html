@@ -1,0 +1,19 @@
+<div ng-controller='ItemListController'>
+
+	Sort by:
+	<select ng-model='ordering'>
+		<option value='name'>Name</option>
+		<option value='status'>Status</option>
+	</select>&nbsp
+	Show:
+	<select ng-model='show.status'>
+		<option value='!4'>All</option>
+		<option value='1'>Replacement required</option>
+		<option value='2'>Issue to address</option>
+		<option value='!3'>Replacement/Issue</option>
+	</select>
+	<br/><br/>
+
+	<itembox ng-repeat='item in items | filter: show | orderBy: ordering' item-details='item'></itembox>
+
+</div>

@@ -6,25 +6,13 @@
 
 			<div class='content'>
 
-				<h2>{{inventory.name}}</h2><hr/>
-				Sort by:
-				<select ng-model='ordering'>
-					<option value='name'>Name</option>
-					<option value='status'>Status</option>
-				</select>
-				Show:
-				<select ng-model='show.status'>
-					<option value='!4'>All</option>
-					<option value='1'>Replacement required</option>
-					<option value='2'>Issue to address</option>
-					<option value='!3'>Replacement/Issue</option>
-				</select> &nbsp
+				<h2>{{inventory.name}}</h2>
 				<div class='btn-group'>
 					<a href='#/edit/inventory/{{inventory.id}}' type='button' class='btn btn-default edit-delete-btn'>Edit</a>
 					<a type='button' class='btn btn-default edit-delete-btn'>Delete</a>
-				</div><br/><br/>
+				</div><hr/>
 
-				<itembox ng-repeat='item in inventory.items | filter: show | orderBy: ordering' item-details='item'></itembox>
+				<item-list items-details='inventory.items'></item-list>
 
 			</div>
 

@@ -58,7 +58,7 @@ angular.module('createEvent',[])
 			// Make request to back-end. 
 			$http.post('api/event/new', {name:$scope.name, startDate:$scope.startDate.valueOf(), endDate:$scope.endDate.valueOf(), invIds:checkedInvs})
 			.success(function(data){
-				$location.path('/home');
+				$location.path('/view/event/'+data.id);
 			})
 			.error(function(err, status){
 				if (status==401){

@@ -1,18 +1,22 @@
 'use strict';
 
-angular.module('viewInventory',[])
-	.controller('ViewInvController', ['$scope', '$routeParams', '$http', '$location','$rootScope','authSyncService', function($scope, $routeParams, $http, $location, $rootScope, authSyncService){
+angular.module('viewEvent',[])
+	.controller('ViewEventController', ['$scope', '$routeParams', '$http', '$location','$rootScope','authSyncService','dateUtility', function($scope, $routeParams, $http, $location, $rootScope, authSyncService, dateUtility){
 		
 		// Gatekeeper
 		$scope.$on('initialise', function(){
 			if (!authSyncService.isLoggedIn()) $location.path('/welcome');
 		});
 
-		var invId = $routeParams.invId; 
+		var eventId = $routeParams.eventId; 
 
-		$http.get('api/inventory/' + invId)
+		$http.get('api/event/' + eventId)
 		.success(function(data){
-			$scope.inventory = data; 
+			$scope.event = data; 
+			$scope.event.startDate = new Date(Number($scope.event.startDate));
+			$scope.event.endDate = new Date(Number($scope.event.endDate));
+			$scope.dateString = dateUtility.dateString($scope.event.startDate, $scope.event.endDate);
+			$scope.countdown = dateUtility.countdown($scope.event.startDate);
 		})
 		.error(function(err, status){
 			if (status==401){
