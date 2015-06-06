@@ -6,7 +6,7 @@ angular.module('createEvent',[])
 		return {
 			restrict: 'E',
 			templateUrl: 'templates/panes/create_event.html', 
-			scope: {}
+			scope: {inventories: '=inventories'}
 		};
 	})
 

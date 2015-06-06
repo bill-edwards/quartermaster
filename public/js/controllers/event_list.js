@@ -18,6 +18,7 @@ angular.module('eventList',[])
 				event.endDate = new Date(Number(event.endDate));
 				event.upcoming = ($scope.now<event.endDate);
 			});
+			$scope.inventories=data.inventories; 
 		})
 		.error(function(err){
 			console.log("QMErr: Data could not be retrieved from server");

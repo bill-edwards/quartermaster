@@ -24,7 +24,12 @@
 			<p class='error_message' ng-show='errors.endDate'>{{errors.endDate}}</p>
 			<hr/>
 
-			<p>+ Add items from inventories</p><hr/>
+			<!-- Include list of inventories with checkboxes-->
+			<p>+ Add items from inventories</p>
+			<p ng-repeat='inventory in inventories'>
+				<input type='checkbox'/>&nbsp{{inventory.name}}
+			</p>
+			<hr/>
 
 			<input type='submit' value='Create event'/>
 			<p class='error_message' ng-show='errors.form'>{{errors.form}}</p>
