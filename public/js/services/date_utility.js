@@ -8,8 +8,10 @@ angular.module('dateUtility',[])
 			// Calculate days remaining until date, rounding up. 
 			var daysDifference = Math.ceil((eventDate - Date.now()) / (24*60*60*1000)); 
 
+			// Tomorrow! 
+			if (daysDifference==1) return "1 day to go!";
 			// Within a month: countdown in days. 
-			if (daysDifference <= 30) return daysDifference+" days to go!";
+			else if (daysDifference <= 30) return daysDifference+" days to go!";
 			// Within three months: countdown in weeks. 
 			else if (daysDifference > 30 && daysDifference <= 90) return Math.floor(daysDifference/7)+" weeks to go!";
 			// Otherwise: countdown in months. 
