@@ -155,6 +155,7 @@ angular.module('editInventory',[])
 		};
 	}])
 
+	// Controller for search-by-inventory section. 
 	.controller('SearchByInventoryController', ['$http', '$scope', function($http, $scope){
 			
 		// Query back-end for details of user's inventories. 
@@ -178,6 +179,19 @@ angular.module('editInventory',[])
 			if($scope.otherInventoryId!=0) {
 				$http.get('api/inventory/'+$scope.otherInventoryId)
 				.success(function(data){
+					// Filter out items already present in inventory being edited. 
+					// Might it be more efficient to maintain a dedicated array of ids of items currently in edited inventory? 
+					// The contents of such an id array would be modified at various different points in code. 
+					data.items = data.items.filter(function(item){
+						var match = false; 
+						for (var index in $scope.inventory.items){
+							if ($scope.inventory.items[index].id == item.id){
+								match = true; 
+								break; 
+							}
+						}
+						return !match; 
+					});
 					$scope.otherInventory = data; 
 				})
 				.error(function(err){
@@ -201,7 +215,7 @@ angular.module('editInventory',[])
 			});
 			// Reset choice of inventory. 
 			$scope.otherInventoryId = 0; 
-			$scope.getItems(); 
+			$scope.otherInventory = []; 
 		};
 
 	}])

@@ -69,7 +69,8 @@
 					<option value='0'>Select inventory</option>
 					<option ng-repeat='inventory in inventories' value='{{inventory.id}}'>{{inventory.name}}</option>
 				</select><br/><br/>
-				<p ng-show='(otherInventoryId!=0)'><button ng-click='addAllItems()'>Add all items</button></p>
+				<!--Add all items button-->
+				<p ng-show='(otherInventoryId!=0 && otherInventory.items.length!=0)'><button ng-click='addAllItems()'>Add all items</button></p>
 				<!--List of items from inventory-->
 				<ul class='list-group'>
 					<li class='list-group-item in-out-item' ng-repeat='item in otherInventory.items' ng-controller='OtherInvItemController'>
@@ -77,6 +78,8 @@
 						<button class='float_right' ng-click='addItem()'>Add</button>
 					</li>
 				</ul>
+				<!--Message to display if there are no items to display-->
+				<p ng-show='(otherInventory.items.length==0)'>'{{otherInventory.name}}' contains no items that are not already in '{{inventory.name}}'. </p>
 			</div>
 
 		</div><!--column-->
