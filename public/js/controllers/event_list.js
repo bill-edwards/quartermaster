@@ -12,7 +12,6 @@ angular.module('eventList',[])
 		$http.get('api/user/me')
 		.success(function(data){
 			$scope.events=data.events; 
-			console.log(data);
 			$scope.events.forEach(function(event){ 
 				event.startDate = new Date(Number(event.startDate));
 				event.endDate = new Date(Number(event.endDate));

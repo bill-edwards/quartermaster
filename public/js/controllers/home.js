@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('home',[])
-	.controller('InvListController', ['$scope', '$http', '$location','$rootScope','authSyncService','validate', function($scope, $http, $location, $rootScope, authSyncService, validate){
+	.controller('HomeController', ['$scope', '$http', '$location','$rootScope','authSyncService', function($scope, $http, $location, $rootScope, authSyncService){
 
 		// Gatekeeper
 		$scope.$on('initialise', function(){
@@ -11,11 +11,19 @@ angular.module('home',[])
 		// Retrieve data from server. 
 		$http.get('api/user/me')
 		.success(function(data){
+			// Set properties on scope using returned data. 
 			$scope.inventories=data.inventories; 
+			$scope.events=data.events; 
+			var now = Date.now(); 
+			$scope.events.forEach(function(event){ 
+				event.startDate = new Date(Number(event.startDate));
+				event.endDate = new Date(Number(event.endDate));
+				event.upcoming = (now<event.endDate);
+			});
 		})
 		.error(function(err, status){
 			if (status==401){
-				window.alert('You seem to have been logged-out. Please log-in to continue.');
+				window.alert('You seem to have been logged out. Please log-in to continue.');
 				// Broadcast logout event to tell titlebar to become hidden. 
 				$rootScope.$broadcast('logout');
 				// Re-direct to welcome page.
@@ -23,6 +31,9 @@ angular.module('home',[])
 			}
 			else console.log("QMErr: Data could not be retrieved from server");
 		});
+	}])
+
+	.controller('InvListController', ['$scope', '$http', '$location','$rootScope','validate', function($scope, $http, $location, $rootScope, validate){
 
 		// Control the create-inventory pane. 
 		$scope.newInventory = "";

@@ -1,4 +1,4 @@
-<div class='container'>
+<div class='container' ng-controller='HomeController'>
 
 	<div class='row'>
 
@@ -32,6 +32,7 @@
 
 			<div class='content'>
 				<h3>Upcoming events</h3><hr/>
+				<eventbox ng-repeat='event in events | filter: {upcoming:true}' event-details='event'></eventbox>
 			</div>
 
 		</div>
