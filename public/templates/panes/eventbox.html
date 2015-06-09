@@ -3,9 +3,11 @@
 		<span ng-show='event.upcoming'>{{countdown}}</span>
 		<h3>{{event.name}}</h3>
 		{{dateString}}
-		<span ng-show='event.upcoming'><br/><br/></span>
-		<span class='label label-danger' ng-show='event.upcoming'>{{event.alerts.red}} items needed</span>
-		<span class='label label-warning' ng-show='event.upcoming'>{{event.alerts.yellow}} items with issues</span>
+		<span ng-show='event.upcoming'><br/><br/>
+			<span class='label label-danger' ng-show='event.upcoming && event.alerts.red'>{{event.alerts.red}} new needed</span>
+			<span class='label label-warning' ng-show='event.upcoming && event.alerts.yellow'>{{event.alerts.yellow}} with issues</span>
+			<span class='label label-success' ng-hide='event.alerts.red || event.alerts.yellow'>Ready to go!</span>
+		</span>
 		<a href='#/view/event/{{event.id}}'><button class='float_right'>See details</button></a>
 	</div>
 </div>
