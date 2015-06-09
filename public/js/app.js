@@ -1,6 +1,6 @@
 'use strict';
 
-var qmApp = angular.module('qmApp',['ngRoute','ui.bootstrap','authSync','validate','dateUtility','welcome','home','viewInventory','viewEvent','eventList','editInventory','titlebar','itembox','eventbox','createEvent','itemList']);
+var qmApp = angular.module('qmApp',['ngRoute','ui.bootstrap','authSync','validate','dateUtility','welcome','home','viewInventory','viewEvent','eventList','editInventory','editEvent','titlebar','itembox','eventbox','createEvent','itemList','editItemList']);
 
 
 // Routing
@@ -22,6 +22,9 @@ qmApp.config(['$routeProvider', function($routeProvider){
     })
     .when('/edit/inventory/:invId', {
     	templateUrl: 'templates/pages/edit_inventory.html'
+    })
+    .when('/edit/event/:eventId', {
+        templateUrl: 'templates/pages/edit_event.html'
     })
     .when('/welcome', {
         templateUrl: 'templates/pages/welcome.html'
