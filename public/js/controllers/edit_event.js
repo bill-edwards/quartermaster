@@ -54,15 +54,10 @@ angular.module('editEvent',[])
 			});
 			var updateData = {addedItems: addedItems, removedItems:removedItems};
 
-			// If inventory name is being edited, validate, and add to update data. 
-			if ($scope.nameField!=$scope.event.name) {
-				updateData.name = $scope.nameField; 
-				var errors = validate(updateData, 'inventory', ['name']);
-				if (errors){
-					$scope.errors = errors; 
-					return;
-				}
-			}
+			// If name, start- or end-date are being edited, (validate), and add to update data. 
+			if ($scope.nameField!=$scope.event.name) updateData.name = $scope.nameField; 
+			if ($scope.startDateField!=$scope.event.startDate) updateData.startDate = $scope.startDateField.valueOf(); 
+			if ($scope.endDateField!=$scope.event.endDate) updateData.endDate = $scope.endDateField.valueOf(); 
 
 			// Submit data to server. 
 			$http.put('api/event/' + eventId, updateData)
