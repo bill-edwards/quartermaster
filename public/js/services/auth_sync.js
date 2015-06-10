@@ -7,17 +7,20 @@ angular.module('authSync',[])
 		var loggedIn = null; 
 
 		// First make call to back-end to get log-in state. 
+		console.log('authSyncService: beginning instantiation, about to make request to /api/user/me');
 		$http.get('/api/user/me')
 		.success(function(data){
 			loggedIn = true;  
+			console.log('authSyncService: data back from server (logged-in); ready to broadcast "initialise"');
 			$rootScope.$broadcast('initialise');
-			console.log('service initialised');
+			console.log('authSyncService: completed broadcast "initialise"');
 		})
 		.error(function(err){
 			loggedIn = false;  
+			console.log('authSyncService: data back from server (not logged-in); ready to broadcast "initialise"');
 			$rootScope.$broadcast('initialise');
 			//setTimeout(function(){$rootScope.$broadcast('initialise');},100);
-			console.log('service initialised');
+			console.log('authSyncService: completed broadcast "initialise"');
 			
 		}); 
 

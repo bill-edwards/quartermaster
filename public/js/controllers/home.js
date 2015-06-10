@@ -3,14 +3,23 @@
 angular.module('home',[])
 	.controller('HomeController', ['$scope', '$http', '$location','$rootScope','authSyncService', function($scope, $http, $location, $rootScope, authSyncService){
 
+		console.log('HomeController: beginning instantiation');
+
 		// Gatekeeper
 		$scope.$on('initialise', function(){
-			if (!authSyncService.isLoggedIn()) $location.path('/welcome');
+			console.log('HomeController: initialise event listener triggered');
+			if (!authSyncService.isLoggedIn()) {
+				console.log('HomeController: preparing to call $location to redirect to welcome');
+				$location.path('/welcome');
+				console.log('HomeController: called $location to redirect to welcome');
+			}
 		});
 		
-		// Retrieve data from server. 
+		// Retrieve data from server.
+		console.log('HomeController: about to make request to /api/user/me'); 
 		$http.get('api/user/me')
 		.success(function(data){
+			console.log('HomeController: data back from /api/user/me; no errors'); 
 			// Set properties on scope using returned data. 
 			$scope.inventories=data.inventories; 
 			$scope.events=data.events; 
@@ -22,8 +31,9 @@ angular.module('home',[])
 			});
 		})
 		.error(function(err, status){
+			console.log('HomeController: data back from /api/user/me; errors'); 
 			if (status==401){
-				window.alert('You seem to have been logged out. Please log-in to continue.');
+				//window.alert('You seem to be a cunt. Please log-in to continue.');
 				// Broadcast logout event to tell titlebar to become hidden. 
 				$rootScope.$broadcast('logout');
 				// Re-direct to welcome page.
@@ -31,6 +41,7 @@ angular.module('home',[])
 			}
 			else console.log("QMErr: Data could not be retrieved from server");
 		});
+		console.log('HomeController: made request to /api/user/me, waiting for response'); 
 	}])
 
 	.controller('InvListController', ['$scope', '$http', '$location','$rootScope','validate', function($scope, $http, $location, $rootScope, validate){

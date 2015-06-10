@@ -4,7 +4,7 @@ angular.module('welcome',[])
 	
 	// Controller for page as a whole. 
 	.controller('WelcomeController', ['$scope','$location','authSyncService', function($scope, $location, authSyncService){
-
+		console.log('WelcomeController: beginning instantiation');
 	}])
 
 	// Controller for login pane. 

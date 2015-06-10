@@ -38,9 +38,11 @@ qmApp.controller('MainBodyController', ['$scope', function($scope){
 
     // Initially hide main body, until authorisation state can be determined. 
     $scope.initialised = false; 
+    console.log('MainBodyController: first instantiated');
     
     // Show main body as soon as authSync service receives authorisation data from back-end. 
     $scope.$on('initialise',function(){
         $scope.initialised = true;
+        console.log('MainBodyController: initialise event listener triggered');
     });
 }]);
