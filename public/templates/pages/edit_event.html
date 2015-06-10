@@ -1,0 +1,20 @@
+<div class='container' ng-controller='EditEventController'>
+
+	<!--Header-->
+	<div class='row'>
+		<div class='col-md-12'>
+			<div class='content'>
+				<h2>Edit event</h2>
+				<label>Event name:</label> <input type='text' ng-model='nameField'/>&nbsp&nbsp
+				<label>Start date:</label> <input type="date" ng-model="startDateField" ng-required="true" />&nbsp&nbsp
+				<label>End date:</label> <input type="date" ng-model="endDateField" ng-required="true" /><br/>
+				<button class='float_right' ng-click='saveChanges()'>Save changes</button><br/><br/>
+				<p class='error_message' ng-show='errors.name'>{{errors.name}}</p>
+			</div>
+		</div>
+	</div>
+
+	<!--Editing columns-->
+	<edit-item-list inventory='event.inventory'></edit-item-list>
+
+</div>
