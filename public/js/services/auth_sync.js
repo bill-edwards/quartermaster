@@ -12,18 +12,13 @@ angular.module('authSync',[])
 			$http.get('/api/user/me')
 			.success(function(data){
 				loggedIn = true;  
-				console.log('authSyncService.authStatus: data back from server (logged-in); ready to broadcast "initialise"');
-				$rootScope.$broadcast('initialise');
-				console.log('authSyncService.authStatus: completed broadcast "initialise"; about to call callback');
+				console.log('authSyncService.authStatus: data back from server (logged-in); about to call callback');
 				callback(); 
 			})
 			.error(function(err){
 				loggedIn = false;  
 				console.log('authSyncService.authStatus: data back from server (not logged-in); ready to redirect to /welcome');
 				$location.path('/welcome');
-				console.log('authSyncService.authStatus: ready to broadcast "initialise"');
-				$rootScope.$broadcast('initialise');
-				console.log('authSyncService.authStatus: completed broadcast "initialise"');
 			}); 
 		}
 

@@ -7,7 +7,11 @@ angular.module('home',[])
 
 		// Gatekeeper
 		authSyncService.authStatus(function(){
-		
+			
+			// If gatekeeper allows access, make main-page body visible. 
+			console.log('HomeController: inside callback; about to broadcast "initialise"');
+			$rootScope.$broadcast('initialise');
+
 			// Retrieve data from server.
 			console.log('HomeController: about to make request to /api/user/me'); 
 			$http.get('api/user/me')
