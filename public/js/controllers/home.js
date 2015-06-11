@@ -3,20 +3,13 @@
 angular.module('home',[])
 	.controller('HomeController', ['$scope', '$http', '$location','$rootScope','authSyncService', function($scope, $http, $location, $rootScope, authSyncService){
 
-		console.log('HomeController: beginning instantiation, about to call authSyncService.authStatus');
-
 		// Gatekeeper
 		authSyncService.authStatus(function(){
-			
-			// If gatekeeper allows access, make main-page body visible. 
-			console.log('HomeController: inside callback; about to broadcast "initialise"');
 			$rootScope.$broadcast('initialise');
 
 			// Retrieve data from server.
-			console.log('HomeController: about to make request to /api/user/me'); 
 			$http.get('api/user/me')
 			.success(function(data){
-				console.log('HomeController: data back from /api/user/me; no errors'); 
 				// Set properties on scope using returned data. 
 				$scope.inventories=data.inventories; 
 				$scope.events=data.events; 
@@ -28,7 +21,6 @@ angular.module('home',[])
 				});
 			})
 			.error(function(err, status){
-				console.log('HomeController: data back from /api/user/me; errors'); 
 				if (status==401){
 					window.alert('You seem to have been logged out. Please log-in to continue.');
 					// Broadcast logout event to tell titlebar to become hidden. 
@@ -38,7 +30,6 @@ angular.module('home',[])
 				}
 				else console.log("QMErr: Data could not be retrieved from server");
 			});
-			console.log('HomeController: made request to /api/user/me, waiting for response'); 
 		});
 	}])
 

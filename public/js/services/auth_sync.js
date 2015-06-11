@@ -8,16 +8,13 @@ angular.module('authSync',[])
 
 		function authStatus(callback){
 			// First make call to back-end to get log-in state. 
-			console.log('authSyncService.authStatus: about to make request to /api/user/me');
 			$http.get('/api/user/me')
 			.success(function(data){
 				loggedIn = true;  
-				console.log('authSyncService.authStatus: data back from server (logged-in); about to call callback');
 				callback(); 
 			})
 			.error(function(err){
 				loggedIn = false;  
-				console.log('authSyncService.authStatus: data back from server (not logged-in); ready to redirect to /welcome');
 				$location.path('/welcome');
 			}); 
 		}

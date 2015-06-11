@@ -4,7 +4,6 @@ angular.module('welcome',[])
 	
 	// Controller for page as a whole. 
 	.controller('WelcomeController', ['$scope','$location','$rootScope','authSyncService', function($scope, $location, $rootScope, authSyncService){
-		console.log('WelcomeController: beginning instantiation; about to broadcast "initialise"');
 		$rootScope.$broadcast('initialise');
 	}])
 
