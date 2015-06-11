@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eventList',[])
-	.controller('EventListController', ['$scope', '$http', 'authSyncService', function($scope, $http, authSyncService){
+	.controller('EventListController', ['$scope', '$http','$rootScope', 'authSyncService', function($scope, $http, $rootScope, authSyncService){
 
 		// Gatekeeper
 		authSyncService.authStatus(function(){
