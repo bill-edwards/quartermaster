@@ -6,20 +6,14 @@ angular.module('editInventory',[])
 	.controller('EditInvController', ['$scope', '$routeParams', '$http', '$location','$rootScope','authSyncService','validate', function($scope, $routeParams, $http, $location, $rootScope, authSyncService, validate){
 
 		// Gatekeeper
-		console.log('EditInvController: about to make call to authSyncService.authStatus');
 		authSyncService.authStatus(function(){
-			console.log('EditInvController: response back from call to authSyncService.authStatus');
 
 			var invId = $routeParams.invId; 
 			$scope.errors = {name:""};
 
-			$scope.inventory={};
-
 			// Get inventory data from server. 
-			console.log('EditInvController: about to make call to /api/inventory/:id');
 			$http.get('api/inventory/' + invId)
 			.success(function(data){
-				console.log('EditInvController: response back from call to /api/inventory/:id');
 				$scope.inventory = data; 
 				$scope.inventory.items.forEach(function(item){
 					item.editStatus='O';

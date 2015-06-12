@@ -5,7 +5,6 @@ angular.module('home',[])
 
 		// Gatekeeper
 		authSyncService.authStatus(function(){
-			$rootScope.$broadcast('initialise');
 
 			// Retrieve data from server.
 			$http.get('api/user/me')
@@ -19,6 +18,7 @@ angular.module('home',[])
 					event.endDate = new Date(Number(event.endDate));
 					event.upcoming = (now<event.endDate);
 				});
+				$rootScope.$broadcast('initialise');
 			})
 			.error(function(err, status){
 				if (status==401){

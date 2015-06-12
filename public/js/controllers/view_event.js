@@ -5,7 +5,6 @@ angular.module('viewEvent',[])
 		
 		// Gatekeeper
 		authSyncService.authStatus(function(){
-			$rootScope.$broadcast('initialise');
 
 			var eventId = $routeParams.eventId; 
 
@@ -16,6 +15,7 @@ angular.module('viewEvent',[])
 				$scope.event.endDate = new Date(Number($scope.event.endDate));
 				$scope.dateString = dateUtility.dateString($scope.event.startDate, $scope.event.endDate);
 				$scope.countdown = dateUtility.countdown($scope.event.startDate);
+				$rootScope.$broadcast('initialise');
 			})
 			.error(function(err, status){
 				if (status==401){

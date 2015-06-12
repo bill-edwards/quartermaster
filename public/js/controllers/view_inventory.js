@@ -5,13 +5,13 @@ angular.module('viewInventory',[])
 		
 		// Gatekeeper
 		authSyncService.authStatus(function(){
-			$rootScope.$broadcast('initialise');
 
 			var invId = $routeParams.invId; 
 
 			$http.get('api/inventory/' + invId)
 			.success(function(data){
 				$scope.inventory = data; 
+				$rootScope.$broadcast('initialise');
 			})
 			.error(function(err, status){
 				if (status==401){

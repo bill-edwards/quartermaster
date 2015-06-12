@@ -5,7 +5,6 @@ angular.module('eventList',[])
 
 		// Gatekeeper
 		authSyncService.authStatus(function(){
-			$rootScope.$broadcast('initialise');
 
 			// Retrieve event data from server. 
 			$http.get('api/user/me')
@@ -17,6 +16,7 @@ angular.module('eventList',[])
 					event.upcoming = ($scope.now<event.endDate);
 				});
 				$scope.inventories=data.inventories; 
+				$rootScope.$broadcast('initialise');
 			})
 			.error(function(err){
 				console.log("QMErr: Data could not be retrieved from server");

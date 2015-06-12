@@ -82,14 +82,11 @@ angular.module('editItemList',[])
 		$scope.$on('initialise',function(){
 
 			// Query back-end for details of user's inventories. 
-			console.log("SearchByInventoryController: about to make call to /api/user/me");
 			$http.get('api/user/me')
 			.success(function(data){
-				console.log("SearchByInventoryController: response back from call to /api/user/me");
 				// Remove the currently edited inventory from the drop-down list. 
 				$scope.inventories = data.inventories.filter(function(inventory){
 					return inventory.id != $scope.inventory.id; 
-					//return true;
 				}); 
 			})
 			.error(function(err){

@@ -6,9 +6,7 @@ angular.module('editEvent',[])
 	.controller('EditEventController', ['$scope', '$routeParams', '$http', '$location','$rootScope','authSyncService','validate', function($scope, $routeParams, $http, $location, $rootScope, authSyncService, validate){
 
 		// Gatekeeper
-		console.log('EditEventController: about to make call to authSyncService.authStatus');
 		authSyncService.authStatus(function(){
-			console.log('EditEventController: response back from call to authSyncService.authStatus');
 			//$rootScope.$broadcast('initialise');
 
 			var eventId = $routeParams.eventId; 
@@ -19,10 +17,8 @@ angular.module('editEvent',[])
 			};
 
 			// Get event data from server. 
-			console.log('EditEventController: about to make call to /api/event/:id');
 			$http.get('api/event/' + eventId)
 			.success(function(data){
-				console.log('EditEventController: response back from call to /api/event/:id');
 				$scope.event = data; 
 				$scope.event.startDate = new Date(Number($scope.event.startDate));
 				$scope.event.endDate = new Date(Number($scope.event.endDate));
