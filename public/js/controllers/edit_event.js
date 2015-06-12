@@ -6,8 +6,10 @@ angular.module('editEvent',[])
 	.controller('EditEventController', ['$scope', '$routeParams', '$http', '$location','$rootScope','authSyncService','validate', function($scope, $routeParams, $http, $location, $rootScope, authSyncService, validate){
 
 		// Gatekeeper
+		console.log('EditEventController: about to make call to authSyncService.authStatus');
 		authSyncService.authStatus(function(){
-			$rootScope.$broadcast('initialise');
+			console.log('EditEventController: response back from call to authSyncService.authStatus');
+			//$rootScope.$broadcast('initialise');
 
 			var eventId = $routeParams.eventId; 
 			$scope.errors = {
@@ -16,9 +18,11 @@ angular.module('editEvent',[])
 				endDate:""
 			};
 
-			// Get inventory data from server. 
+			// Get event data from server. 
+			console.log('EditEventController: about to make call to /api/event/:id');
 			$http.get('api/event/' + eventId)
 			.success(function(data){
+				console.log('EditEventController: response back from call to /api/event/:id');
 				$scope.event = data; 
 				$scope.event.startDate = new Date(Number($scope.event.startDate));
 				$scope.event.endDate = new Date(Number($scope.event.endDate));
@@ -29,6 +33,7 @@ angular.module('editEvent',[])
 				$scope.nameField = $scope.event.name; // Must be named separately so we can detemine if it has been changed when saving changes. 
 				$scope.startDateField = $scope.event.startDate; 
 				$scope.endDateField = $scope.event.endDate; 
+				$rootScope.$broadcast('initialise');
 			})
 			.error(function(err, status){
 				console.log('unknown error');
