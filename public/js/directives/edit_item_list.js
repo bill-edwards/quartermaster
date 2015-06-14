@@ -75,6 +75,46 @@ angular.module('editItemList',[])
 		};
 	}])
 
+	// Controller for search-by-name section. 
+	// Parent scope is EditItemListController. 
+	.controller('SearchByNameController', ['$http', '$scope', function($http, $scope){
+		
+		$scope.$on('initialise',function(){
+
+			$scope.searchField = "";
+
+			// Function called when inventory is selected from drop-down menu. 
+			$scope.getItems = function(){
+				// If an inventory is selected: 
+				if($scope.searchField) {
+					$http.get('api/item/?search='+$scope.searchField)
+					.success(function(data){
+						// Filter out items already present in inventory being edited. 
+						// Might it be more efficient to maintain a dedicated array of ids of items currently in edited inventory? 
+						// The contents of such an id array would be modified at various different points in code. 
+						data = data.filter(function(item){
+							var match = false; 
+							for (var index in $scope.inventory.items){
+								if ($scope.inventory.items[index].id == item.id){
+									match = true; 
+									break; 
+								}
+							}
+							return !match; 
+						});
+						$scope.searchResults = data; 
+					})
+					.error(function(err){
+						console.log('error with retrieving search results');
+					});
+				}
+				else $scope.searchResults = [];
+			};
+
+  		});
+
+	}])
+
 	// Controller for search-by-inventory section. 
 	// Parent scope is EditItemListController. 
 	.controller('SearchByInventoryController', ['$http', '$scope', function($http, $scope){

@@ -40,32 +40,45 @@
 	<div class='col-md-4'>
 
 		<!--Include items from other inventories-->
-		<div class='content' ng-controller='SearchByInventoryController'>
+		<div class='content'>
 			<h3>Search for items</h3>
 
+			<!--Search by name-->
 			<hr/>
-			<h4>...by name</h4>
-			<input type='text' />
-			<button>Search</button>
+			<div ng-controller='SearchByNameController'>
+				<h4>...by name</h4>
+				<input type='text' ng-model='searchField'/>
+				<button ng-click='getItems()'>Search</button><br/><br/>
+				<!--List of items returned by search-->
+				<ul class='list-group'>
+					<li class='list-group-item in-out-item' ng-repeat='item in searchResults'>
+						{{item.name}}
+						<button class='float_right'>Add</button>
+					</li>
+				</ul>
+			</div>
 
-			<!--Drop-down menu of user's inventories-->
+			<!--Search by inventory-->
 			<hr/>
-			<h4>...from other inventories</h4>
-			<select ng-model='otherInventoryId' ng-change='getItems()'>
-				<option value='0'>Select inventory</option>
-				<option ng-repeat='inventory in inventories' value='{{inventory.id}}'>{{inventory.name}}</option>
-			</select><br/><br/>
-			<!--Add all items button-->
-			<p ng-show='(otherInventoryId!=0 && otherInventory.items.length!=0)'><button ng-click='addAllItems()'>Add all items</button></p>
-			<!--List of items from inventory-->
-			<ul class='list-group'>
-				<li class='list-group-item in-out-item' ng-repeat='item in otherInventory.items' ng-controller='OtherInvItemController'>
-					{{item.name}}
-					<button class='float_right' ng-click='addItem()'>Add</button>
-				</li>
-			</ul>
-			<!--Message to display if there are no items to display-->
-			<p ng-show='(otherInventory.items.length==0)'>'{{otherInventory.name}}' contains no items that are not already in '{{inventory.name}}'. </p>
+			<div  ng-controller='SearchByInventoryController'>
+				<h4>...from other inventories</h4>
+				<!--Drop-down menu of user's inventories-->
+				<select ng-model='otherInventoryId' ng-change='getItems()'>
+					<option value='0'>Select inventory</option>
+					<option ng-repeat='inventory in inventories' value='{{inventory.id}}'>{{inventory.name}}</option>
+				</select><br/><br/>
+				<!--Add all items button-->
+				<p ng-show='(otherInventoryId!=0 && otherInventory.items.length!=0)'><button ng-click='addAllItems()'>Add all items</button></p>
+				<!--List of items from inventory-->
+				<ul class='list-group'>
+					<li class='list-group-item in-out-item' ng-repeat='item in otherInventory.items' ng-controller='OtherInvItemController'>
+						{{item.name}}
+						<button class='float_right' ng-click='addItem()'>Add</button>
+					</li>
+				</ul>
+				<!--Message to display if there are no items to display-->
+				<p ng-show='(otherInventory.items.length==0)'>'{{otherInventory.name}}' contains no items that are not already in '{{inventory.name}}'. </p>
+			</div>
 		</div>
 
 	</div><!--column-->
