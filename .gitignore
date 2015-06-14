@@ -1,0 +1,4 @@
+#Don't track node-modules - can easily be installed with npm. 
+lib/node_modules
+lib/config.js
+lib/spec
