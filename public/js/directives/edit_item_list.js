@@ -143,8 +143,6 @@ angular.module('editItemList',[])
 
   		});
 
-
-
 	}])
 
 	// Controller for item boxes from search-by-inventory section. 
