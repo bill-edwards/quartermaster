@@ -85,8 +85,6 @@ angular.module('editItemList',[])
 			$scope.nameToSearchFor = "";
 			$scope.inventoryToSearch = 0; 
 
-			$scope.message = 'hello';
-
 			//Initialise results arrays.
 			$scope.nameItemList = [];
 			$scope.invItemList = [];
@@ -168,6 +166,7 @@ angular.module('editItemList',[])
 				$scope.invItemList = []; 
 			};
 
+			// Actually invoked from within OtherInvItemController, but a function defined there apparently can't mainpulate $scope variables of its parent controller. 
 			$scope.removeFromItemLists = function(id){
 				var removeThis = function(item){
 					return item.id != id; 

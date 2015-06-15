@@ -57,7 +57,6 @@ angular.module('home',[])
 				.success(function(data){
 					// Re-direct to edit-inventory page. 
 					$location.path('/edit/inventory/'+data.id);
-					console.log(data.id);
 				})
 				.error(function(err, status){
 					if (status==400){
