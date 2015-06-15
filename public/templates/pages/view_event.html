@@ -5,12 +5,12 @@
 		<div class='col-md-10'>
 
 			<div class='content'>
-				<h2>{{event.name}}</h2>
-				<h4>{{dateString}}&nbsp - &nbsp{{countdown}}</h4>
-				<div class='btn-group'>
+				<h2>{{event.name}}</h2><hr/>
+				<b>{{dateString}}&nbsp - &nbsp{{countdown}}</b><br/>
+				<div class='btn-group float_right'>
 					<a href='#/edit/event/{{event.id}}' type='button' class='btn btn-default edit-delete-btn'>Edit</a>
 					<a type='button' class='btn btn-default edit-delete-btn'>Delete</a>
-				</div><hr/>
+				</div><br/>
 
 				<item-list items-details='event.inventory.items'></item-list>
 
