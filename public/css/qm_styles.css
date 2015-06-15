@@ -12,7 +12,7 @@ body{
 	float:right;
 }
 
-p.error_message{
+.error_message{
 	color:Red;
 }
 

@@ -26,6 +26,13 @@ angular.module('validate',[])
 					return raw; 
 				},
 				errMessage : "Password must be at least 8 characters long, and contain no whitespace."
+			}, 
+			date : {
+				regex : /^\d{11,14}$/,
+				format : function(raw){
+					return raw;
+				},
+				errMessage : "This is not a valid date."
 			}
 		};
 
@@ -38,6 +45,11 @@ angular.module('validate',[])
 			inventory : {
 				name : validationTypes.text
 			},
+			event: {
+				name: validationTypes.text,
+				startDate: validationTypes.date,
+				endDate: validationTypes.date
+			},
 			item : {
 				name : validationTypes.text,
 				issue : validationTypes.text
@@ -46,7 +58,7 @@ angular.module('validate',[])
 
 		// This is the function returned by the service. 
 		// data should be an object containing the contents of each field in the form.
-		// model should be one of the properties of the model object above: 'user', 'inventory' or 'item'.
+		// model should be one of the properties of the model object above: 'user', 'inventory', 'event' or 'item'.
 		// toCheck should be an array of strings, giving the properties of the data object that need verification (all those where the client has leeway to choose the supplied data). 
 		function validate(data, model, toCheck){
 

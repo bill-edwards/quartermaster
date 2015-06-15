@@ -10,7 +10,7 @@ angular.module('createEvent',[])
 		};
 	})
 
-	.controller('CreateEventController', ['$scope','$http','$location','$rootScope', function($scope, $http, $location, $rootScope){
+	.controller('CreateEventController', ['$scope','$http','$location','$rootScope', 'validate', function($scope, $http, $location, $rootScope, validate){
 
 		// Initialise form fields
 		var now = new Date(Date.now()); 
@@ -36,6 +36,13 @@ angular.module('createEvent',[])
 		$scope.submit = function(){
 
 			if ($scope.multiDay=='one') $scope.endDate = $scope.startDate; 
+
+			// Next validate contents of fields. 
+			var errors = validate({name:$scope.name}, 'event', ['name']); 
+			if (errors) {
+				$scope.errors = errors; 
+				return;
+			}
 
 			// Start date must be today or later. 
 			if ($scope.startDate<(now-86400000)) {
