@@ -75,51 +75,21 @@ angular.module('editItemList',[])
 		};
 	}])
 
-	// Controller for search-by-name section. 
+	// Controller for search section. 
 	// Parent scope is EditItemListController. 
-	.controller('SearchByNameController', ['$http', '$scope', function($http, $scope){
+	.controller('SearchController', ['$http', '$scope', function($http, $scope){
 		
 		$scope.$on('initialise',function(){
 
-			$scope.searchField = "";
+			//Initialiase search fields. 
+			$scope.nameToSearchFor = "";
+			$scope.inventoryToSearch = 0; 
 
-			// Function called when inventory is selected from drop-down menu. 
-			$scope.getItems = function(){
-				// If an inventory is selected: 
-				if($scope.searchField) {
-					$http.get('api/item/?search='+$scope.searchField)
-					.success(function(data){
-						// Filter out items already present in inventory being edited. 
-						// Might it be more efficient to maintain a dedicated array of ids of items currently in edited inventory? 
-						// The contents of such an id array would be modified at various different points in code. 
-						data = data.filter(function(item){
-							var match = false; 
-							for (var index in $scope.inventory.items){
-								if ($scope.inventory.items[index].id == item.id){
-									match = true; 
-									break; 
-								}
-							}
-							return !match; 
-						});
-						$scope.searchResults = data; 
-					})
-					.error(function(err){
-						console.log('error with retrieving search results');
-					});
-				}
-				else $scope.searchResults = [];
-			};
+			$scope.message = 'hello';
 
-  		});
-
-	}])
-
-	// Controller for search-by-inventory section. 
-	// Parent scope is EditItemListController. 
-	.controller('SearchByInventoryController', ['$http', '$scope', function($http, $scope){
-		
-		$scope.$on('initialise',function(){
+			//Initialise results arrays.
+			$scope.nameItemList = [];
+			$scope.invItemList = [];
 
 			// Query back-end for details of user's inventories. 
 			$http.get('api/user/me')
@@ -130,32 +100,48 @@ angular.module('editItemList',[])
 				}); 
 			})
 			.error(function(err){
-				console.log('error with getting user details');
+				console.log('error with getting user\'s inventories');
 			});
 
-			// Initially have no inventory selected. 
-			$scope.otherInventoryId = 0;
+			// Function used in getItemsByName() and getItemsFromInv().
+			// Filters out items already present in the inventory being edited. 
+			function filterExistingItems(fullItemList){
+				return fullItemList.filter(function(item){
+					var match = false; 
+					for (var index in $scope.inventory.items){
+						if ($scope.inventory.items[index].id == item.id){
+							match = true; 
+							break; 
+						}
+					}
+					return !match; 
+				});
+			};
+
+			// Function called when search (by-name) button is pressed. 
+			$scope.getItemsByName = function(){
+				// If an inventory is selected: 
+				if($scope.nameToSearchFor) {
+					$http.get('api/item/?search='+$scope.nameToSearchFor)
+					.success(function(data){
+						$scope.nameItemList = filterExistingItems(data); 
+					})
+					.error(function(err){
+						console.log('error with retrieving search results');
+					});
+				}
+				else $scope.searchResults = [];
+			};
 
 			// Function called when inventory is selected from drop-down menu. 
-			$scope.getItems = function(){
+			$scope.getItemsFromInv = function(){
 				// If an inventory is selected: 
 				if($scope.otherInventoryId!=0) {
-					$http.get('api/inventory/'+$scope.otherInventoryId)
+					$http.get('api/inventory/'+$scope.inventoryToSearch)
 					.success(function(data){
-						// Filter out items already present in inventory being edited. 
-						// Might it be more efficient to maintain a dedicated array of ids of items currently in edited inventory? 
-						// The contents of such an id array would be modified at various different points in code. 
-						data.items = data.items.filter(function(item){
-							var match = false; 
-							for (var index in $scope.inventory.items){
-								if ($scope.inventory.items[index].id == item.id){
-									match = true; 
-									break; 
-								}
-							}
-							return !match; 
-						});
-						$scope.otherInventory = data; 
+						data.items = filterExistingItems(data.items);
+						$scope.invItemList = data.items; 
+						$scope.otherInventoryName = data.name;
 					})
 					.error(function(err){
 						console.log('error with retrieving other inventory');
@@ -167,7 +153,7 @@ angular.module('editItemList',[])
 			// Function called when 'add all items' button is pressed. 
 			$scope.addAllItems = function(){
 				// Deep copy each item, add extra fields, push to array of items in main page scope. 
-				$scope.otherInventory.items.forEach(function(item){
+				$scope.invItemList.forEach(function(item){
 					var addedItem = {};
 					for (var prop in item){
 						addedItem[prop] = item[prop]; 
@@ -175,22 +161,28 @@ angular.module('editItemList',[])
 					addedItem.inOut = 'in';
 					addedItem.editStatus = 'A';
 					$scope.inventory.items.push(addedItem); 
+					$scope.removeFromItemLists(item.id);
 				});
 				// Reset choice of inventory. 
-				$scope.otherInventoryId = 0; 
-				$scope.otherInventory = []; 
+				$scope.inventoryToSearch = 0; 
+				$scope.invItemList = []; 
 			};
 
+			$scope.removeFromItemLists = function(id){
+				var removeThis = function(item){
+					return item.id != id; 
+				};
+				$scope.nameItemList = $scope.nameItemList.filter(removeThis);
+				$scope.invItemList = $scope.invItemList.filter(removeThis);
+			}
   		});
-
 	}])
 
 	// Controller for item boxes from search-by-inventory section. 
-	// Parent scope is SearchByInventoryController. 
+	// Parent scope is SearchByInventoryController or SearchByNameController. 
 	.controller('OtherInvItemController', ['$scope', function($scope){
 
 		$scope.addItem = function(){
-
 			// Deep copy item, and add extra fields. 
 			var addedItem = {};
 			for (var prop in $scope.item){
@@ -201,8 +193,7 @@ angular.module('editItemList',[])
 			// Push item into array of items on main page scope. 
 			$scope.inventory.items.push(addedItem); 
 			// Remove item from array of items on search-by-inventory scope. 
-			$scope.otherInventory.items = $scope.otherInventory.items.filter(function(item){
-				return item.id != $scope.item.id; 
-			});
+			$scope.removeFromItemLists($scope.item.id);
 		};
+
 	}]);
