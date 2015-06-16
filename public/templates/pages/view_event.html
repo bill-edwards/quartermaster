@@ -5,11 +5,13 @@
 		<div class='col-md-10'>
 
 			<div class='content'>
+
 				<h2>{{event.name}}</h2><hr/>
-				<b>{{dateString}}&nbsp - &nbsp{{countdown}}</b><br/>
+				<span class='date-string'>{{dateString}}&nbsp - &nbsp{{countdown}}</span><br/>
+				<p class='error_message' ng-show='errors.form'>{{errors.form}}</p>
 				<div class='btn-group float_right'>
 					<a href='#/edit/event/{{event.id}}' type='button' class='btn btn-default edit-delete-btn'>Edit</a>
-					<a type='button' class='btn btn-default edit-delete-btn'>Delete</a>
+					<a type='button' class='btn btn-default edit-delete-btn' ng-click='deleteEvent()'>Delete</a>
 				</div><br/>
 
 				<item-list items-details='event.inventory.items'></item-list>

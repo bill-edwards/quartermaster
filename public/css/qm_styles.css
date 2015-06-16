@@ -75,6 +75,12 @@ a.edit-delete-btn{
 	border:solid 1px;
 }
 
+/* View event */
+span.date-string{
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
 /* Edit inventory */
 
 li.in-out-item{
@@ -143,13 +149,6 @@ li.tabs{
 .unselected_tab{
 	background-color: LightGray;
 	border: 1px solid;
-}
-
-/* Create event */ 
-
-div.create_event{
-	float:left;
-	width:360px;
 }
 
 
