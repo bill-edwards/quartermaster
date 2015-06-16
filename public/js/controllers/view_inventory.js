@@ -46,7 +46,7 @@ angular.module('viewInventory',[])
 							$location.path('/welcome');
 						}
 						else if (status==404){
-							$scope.errors.form = "We're having trouble locating this item in our records. Please refresh this page and try again.";
+							$scope.errors.form = "We're having trouble locating this inventory in our records. Please refresh this page and try again.";
 						}
 						else if (status==500){
 							$scope.errors.form = "Sorry, there was a problem connecting to the server. Please try again.";
