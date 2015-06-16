@@ -7,9 +7,10 @@
 			<div class='content'>
 
 				<h2>{{inventory.name}}</h2><hr/>
+				<p class='error_message' ng-show='errors.form'>{{errors.form}}</p>
 				<div class='btn-group float_right'>
 					<a href='#/edit/inventory/{{inventory.id}}' type='button' class='btn btn-default edit-delete-btn'>Edit</a>
-					<a type='button' class='btn btn-default edit-delete-btn'>Delete</a>
+					<a type='button' class='btn btn-default edit-delete-btn' ng-click='deleteInventory()'>Delete</a>
 				</div><br/>
 
 				<item-list items-details='inventory.items'></item-list>
