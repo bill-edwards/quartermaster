@@ -9,5 +9,9 @@
     "express": "^4.12.3",
     "express-session": "^1.11.1",
     "mysql": "^2.6.1"
+  },
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "supertest": "^1.0.1"
   }
 }
